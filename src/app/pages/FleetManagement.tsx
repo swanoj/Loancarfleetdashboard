@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import { Search, ChevronDown, AlertTriangle } from 'lucide-react';
+import { Search, ChevronDown, AlertTriangle, Plus, Edit, Trash2, Upload } from 'lucide-react';
 import { useFleet } from '../context/FleetContext';
 import { StatusBadge } from '../components/StatusBadge';
 import { CarIcon } from '../components/CarIcon';
 import { CarPortal } from './CarPortal';
+import { VehicleFormModal } from '../components/VehicleFormModal';
+import { CSVImportModal } from '../components/CSVImportModal';
+import { Car } from '../data/mockData';
 
 export function FleetManagement() {
-  const { cars } = useFleet();
+  const { cars, addCar, updateCar, deleteCar, loading } = useFleet();
   const [statusFilter, setStatusFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortField, setSortField] = useState<'rego' | 'make' | 'status' | 'expiry'>('rego');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [selectedCarId, setSelectedCarId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCar, setEditingCar] = useState<Car | undefined>(undefined);
+  const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
+  const [isCSVModalOpen, setIsCSVModalOpen] = useState(false);
   
   const handleSort = (field: typeof sortField) => {
     if (field === sortField) {
@@ -150,6 +157,9 @@ export function FleetManagement() {
                   >
                     Rego Expiry {sortField === 'expiry' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </th>
+                  <th className="text-left px-4 py-3 text-xs uppercase tracking-wide text-[#9CA3AF] font-medium">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -161,23 +171,31 @@ export function FleetManagement() {
                   return (
                     <tr 
                       key={car.id}
-                      className="border-t border-[#E5E7EB] hover:bg-[#F8F9FA] transition-colors cursor-pointer"
-                      onClick={() => setSelectedCarId(car.id)}
+                      className="border-t border-[#E5E7EB] hover:bg-[#F8F9FA] transition-colors"
                     >
-                      <td className="px-4 py-3">
+                      <td 
+                        className="px-4 py-3 cursor-pointer"
+                        onClick={() => setSelectedCarId(car.id)}
+                      >
                         <div className="flex items-center gap-2">
                           <CarIcon model={car.model} className="w-4 h-4 text-[#9CA3AF]" />
                           <span className="font-mono text-[#1A1A1D] font-medium">{car.rego}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-3">
+                      <td 
+                        className="px-4 py-3 cursor-pointer"
+                        onClick={() => setSelectedCarId(car.id)}
+                      >
                         <div className="text-[#1A1A1D] font-medium">{car.make} {car.model}</div>
                         <div className="text-sm text-[#6B7280] flex items-center gap-2 mt-0.5">
                           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: car.colorHex }} />
                           {car.year} • {car.color}
                         </div>
                       </td>
-                      <td className="px-4 py-3">
+                      <td 
+                        className="px-4 py-3 cursor-pointer"
+                        onClick={() => setSelectedCarId(car.id)}
+                      >
                         <StatusBadge variant={car.status}>
                           {car.status === 'available' ? 'Available' : 
                            car.status === 'out' ? 'Out' :
@@ -186,10 +204,16 @@ export function FleetManagement() {
                            'Cleaning'}
                         </StatusBadge>
                       </td>
-                      <td className="px-4 py-3">
+                      <td 
+                        className="px-4 py-3 cursor-pointer"
+                        onClick={() => setSelectedCarId(car.id)}
+                      >
                         <span className="text-[#6B7280]">{car.bay || '—'}</span>
                       </td>
-                      <td className="px-4 py-3">
+                      <td 
+                        className="px-4 py-3 cursor-pointer"
+                        onClick={() => setSelectedCarId(car.id)}
+                      >
                         <div className="flex items-center gap-2">
                           <span className={`text-sm ${
                             isCritical ? 'text-[#EF4444] font-semibold' :
@@ -200,6 +224,34 @@ export function FleetManagement() {
                           </span>
                           {isCritical && <AlertTriangle className="w-4 h-4 text-[#EF4444]" />}
                           {isWarning && !isCritical && <AlertTriangle className="w-4 h-4 text-[#F59E0B]" />}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditingCar(car);
+                              setModalMode('edit');
+                              setIsModalOpen(true);
+                            }}
+                            className="p-1.5 rounded-lg hover:bg-blue-50 text-[#6B7280] hover:text-[#3B82F6] transition-colors"
+                            title="Edit vehicle"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (confirm(`Are you sure you want to delete ${car.rego}?`)) {
+                                deleteCar(car.id);
+                              }
+                            }}
+                            className="p-1.5 rounded-lg hover:bg-red-50 text-[#6B7280] hover:text-[#EF4444] transition-colors"
+                            title="Delete vehicle"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -218,6 +270,58 @@ export function FleetManagement() {
           onClose={() => setSelectedCarId(null)}
         />
       )}
+      
+      {/* Add/Edit Vehicle Modal */}
+      <VehicleFormModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingCar(undefined);
+        }}
+        vehicle={editingCar}
+        mode={modalMode}
+        onSave={(car) => {
+          if (modalMode === 'create') {
+            addCar(car);
+          } else if (modalMode === 'edit' && editingCar) {
+            updateCar(editingCar.id, car);
+          }
+          setIsModalOpen(false);
+          setEditingCar(undefined);
+        }}
+      />
+      
+      {/* CSV Import Modal */}
+      <CSVImportModal
+        isOpen={isCSVModalOpen}
+        onClose={() => setIsCSVModalOpen(false)}
+        onImport={(cars) => {
+          cars.forEach(car => addCar(car));
+          setIsCSVModalOpen(false);
+        }}
+      />
+      
+      {/* Add Vehicle Button */}
+      <button
+        className="fixed bottom-4 right-4 bg-[#F97066] text-white rounded-full p-3 shadow-lg hover:bg-[#F85F53] transition-colors"
+        onClick={() => {
+          setModalMode('create');
+          setEditingCar(undefined);
+          setIsModalOpen(true);
+        }}
+      >
+        <Plus className="w-5 h-5" />
+      </button>
+      
+      {/* Import CSV Button */}
+      <button
+        className="fixed bottom-4 left-4 bg-white border border-[#E5E7EB] text-[#1A1A1D] rounded-full px-5 py-3 shadow-lg hover:shadow-xl transition-all flex items-center gap-2 font-medium"
+        onClick={() => setIsCSVModalOpen(true)}
+        title="Import vehicles from CSV"
+      >
+        <Upload className="w-5 h-5 text-[#F97066]" />
+        <span>Import CSV</span>
+      </button>
     </div>
   );
 }

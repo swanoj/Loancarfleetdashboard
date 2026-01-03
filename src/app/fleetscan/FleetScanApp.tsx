@@ -7,6 +7,7 @@ import { DamageAnalysis } from './screens/DamageAnalysis';
 import { DashboardCapture } from './screens/DashboardCapture';
 import { ReviewSubmit } from './screens/ReviewSubmit';
 import { Success } from './screens/Success';
+import { CustomerHub } from './screens/CustomerHub';
 import { addRecentVehicle } from './utils/mockApi';
 import { ArrowLeft } from 'lucide-react';
 
@@ -18,7 +19,8 @@ type Screen =
   | 'dashboard' 
   | 'review' 
   | 'success'
-  | 'submitting';
+  | 'submitting'
+  | 'customerhub';
 
 interface FleetScanContentProps {
   onBackToHome?: () => void;
@@ -84,10 +86,10 @@ function FleetScanContent({ onBackToHome }: FleetScanContentProps) {
       {onBackToHome && (
         <button
           onClick={onBackToHome}
-          className="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl text-white hover:bg-white/20 transition-all duration-150 group"
+          className="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-md border border-[#E5E7EB] rounded-lg text-[#1A1A1D] hover:bg-white hover:shadow-md transition-all duration-150 group"
         >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="font-medium">Back to Dashboard</span>
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+          <span className="text-sm font-medium">Back to Dashboard</span>
         </button>
       )}
       
@@ -136,6 +138,12 @@ function FleetScanContent({ onBackToHome }: FleetScanContentProps) {
           onNewInspection={handleNewInspection}
           inspectionType={inspection.type}
           vehicleRego={currentVehicle.rego}
+        />
+      )}
+      
+      {currentScreen === 'customerhub' && (
+        <CustomerHub
+          onNewInspection={handleNewInspection}
         />
       )}
     </>

@@ -1,0 +1,142 @@
+═══════════════════════════════════════════════════════════════
+  📱 CUSTOMER HUB - QUICK LINK GUIDE
+═══════════════════════════════════════════════════════════════
+
+🔗 TEST ON YOUR PHONE RIGHT NOW:
+───────────────────────────────────────────────────────────────
+
+1. Find your computer's IP address:
+   Mac: System Preferences → Network
+   Windows: cmd → ipconfig
+   
+   Example: 192.168.1.100
+
+2. On your phone, open browser and go to:
+   
+   http://192.168.1.100:5173/customer-hub?loan=DEMO-123
+   
+   (Replace 192.168.1.100 with YOUR IP address)
+
+3. Make sure phone is on SAME WiFi as your computer!
+
+═══════════════════════════════════════════════════════════════
+
+📲 SMS TEMPLATE (Copy & Paste):
+───────────────────────────────────────────────────────────────
+
+Hi [NAME],
+
+Your loan car is ready!
+
+🚗 [MAKE] [MODEL] ([REGO])
+⏰ Due: [DATE] at [TIME]
+
+Complete agreement & start GPS:
+[PASTE YOUR LINK HERE]
+
+Upload licence & accept terms.
+
+Questions? [YOUR PHONE]
+- [YOUR WORKSHOP NAME]
+
+───────────────────────────────────────────────────────────────
+
+📝 REAL EXAMPLE:
+───────────────────────────────────────────────────────────────
+
+Hi Sarah,
+
+Your loan car is ready!
+
+🚗 VW Passat (YOT95K)
+⏰ Due: Mon 6 Jan at 2:00 PM
+
+Complete agreement & start GPS:
+http://192.168.1.100:5173/customer-hub?loan=LOAN-ABC123
+
+Upload licence & accept terms.
+
+Questions? (02) 9555 1234
+- Premium Auto Service
+
+═══════════════════════════════════════════════════════════════
+
+🚀 PRODUCTION DEPLOYMENT:
+───────────────────────────────────────────────────────────────
+
+After deploying to Vercel/Netlify, your link becomes:
+
+https://your-app.vercel.app/customer-hub?loan=LOAN-123
+
+Or use a custom domain:
+
+https://loans.yourworkshop.com.au/hub?loan=L123
+
+═══════════════════════════════════════════════════════════════
+
+✅ WHAT CUSTOMER DOES:
+───────────────────────────────────────────────────────────────
+
+1. Taps link in SMS
+2. Reviews loan details
+3. Uploads licence photos (front & back)
+4. Takes verification selfie
+5. Accepts terms
+6. GPS tracking starts automatically
+7. Keeps page open during loan
+8. Clicks "End Loan" when returning
+
+═══════════════════════════════════════════════════════════════
+
+👀 WHAT YOU SEE:
+───────────────────────────────────────────────────────────────
+
+Dashboard → Live Tracking → See their GPS location in real-time!
+
+- Current coordinates
+- Distance traveled
+- Journey duration
+- Google Maps links
+- Auto-refresh every 10 seconds
+
+═══════════════════════════════════════════════════════════════
+
+🎯 QUICK START CHECKLIST:
+───────────────────────────────────────────────────────────────
+
+[ ] Find your computer's IP address
+[ ] Test link on your phone
+[ ] Check GPS tracking works
+[ ] Customize SMS template
+[ ] Send to first customer
+[ ] Monitor on Live Tracking dashboard
+[ ] Deploy to production when ready
+
+═══════════════════════════════════════════════════════════════
+
+💡 PRO TIPS:
+───────────────────────────────────────────────────────────────
+
+✓ Send SMS while customer is still at workshop (can help if issues)
+✓ Enable auto-refresh on Live Tracking dashboard
+✓ Test on your own phone before sending to customers
+✓ Keep SMS under 160 characters for single message
+✓ Use QR codes for in-person handovers
+
+═══════════════════════════════════════════════════════════════
+
+📱 TEST NOW:
+───────────────────────────────────────────────────────────────
+
+http://[YOUR-IP]:5173/customer-hub?loan=TEST-123
+
+Replace [YOUR-IP] with your actual IP address!
+
+═══════════════════════════════════════════════════════════════
+
+Need more details? Check these files:
+- CUSTOMER_HUB_SETUP_GUIDE.md (Complete setup instructions)
+- CUSTOMER_LOAN_SMS_TEMPLATE.md (More SMS examples)
+- GPS_TRACKING_GUIDE.md (Technical documentation)
+
+═══════════════════════════════════════════════════════════════

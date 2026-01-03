@@ -17,7 +17,14 @@ import {
   CheckCircle,
   User,
   Plus,
-  Edit
+  Edit,
+  Fuel,
+  Gauge,
+  Hash,
+  Zap,
+  Settings,
+  TrendingUp,
+  AlertTriangle
 } from 'lucide-react';
 
 interface CarPortalProps {
@@ -219,10 +226,171 @@ export function CarPortal({ carId, onClose }: CarPortalProps) {
         <div className="flex-1 overflow-y-auto p-8">
           {activeTab === 'overview' && (
             <div className="space-y-6">
+              {/* Current State Cards */}
+              <div className="grid grid-cols-3 gap-4">
+                {/* Odometer */}
+                <div className="bg-white border border-[#DEE2E6] rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                      <Gauge className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <TrendingUp className="w-4 h-4 text-[#10B981]" />
+                  </div>
+                  <div className="text-sm text-[#6C757D] mb-1">Odometer</div>
+                  <div className="text-2xl font-semibold font-mono text-[#212529]">
+                    {car.odometer ? car.odometer.toLocaleString() : '—'} km
+                  </div>
+                  <div className="text-xs text-[#6C757D] mt-2">Last updated today</div>
+                </div>
+                
+                {/* Fuel Type */}
+                <div className="bg-white border border-[#DEE2E6] rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
+                      <Fuel className="w-5 h-5 text-amber-600" />
+                    </div>
+                  </div>
+                  <div className="text-sm text-[#6C757D] mb-1">Fuel Type</div>
+                  <div className="text-2xl font-semibold text-[#212529]">
+                    {car.fuelType || 'Petrol'}
+                  </div>
+                  <div className="text-xs text-[#6C757D] mt-2">
+                    {car.transmission || 'Automatic'}
+                  </div>
+                </div>
+                
+                {/* VIN */}
+                <div className="bg-white border border-[#DEE2E6] rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center">
+                      <Hash className="w-5 h-5 text-purple-600" />
+                    </div>
+                  </div>
+                  <div className="text-sm text-[#6C757D] mb-1">VIN Number</div>
+                  <div className="text-lg font-semibold font-mono text-[#212529] truncate">
+                    {car.vin || 'Not recorded'}
+                  </div>
+                  {car.vin && (
+                    <div className="text-xs text-[#6C757D] mt-2">Vehicle ID</div>
+                  )}
+                </div>
+              </div>
+              
+              {/* Current State Alert */}
+              {car.status === 'out' && activeLoans > 0 && (
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+                      <User className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#212529] mb-1">Currently On Loan</h4>
+                      <div className="text-sm text-[#495057]">
+                        Customer: <span className="font-medium">{carLoans[0]?.customer}</span>
+                        {carLoans[0]?.driver && carLoans[0].driver !== carLoans[0].customer && (
+                          <> • Driver: <span className="font-medium">{carLoans[0].driver}</span></>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-4 mt-3 text-sm">
+                        <div>
+                          <span className="text-[#6C757D]">Checked out:</span>
+                          <span className="ml-1 font-medium text-[#212529]">
+                            {new Date(carLoans[0]?.checkedOut).toLocaleDateString('en-AU', { 
+                              day: 'numeric', 
+                              month: 'short',
+                              hour: 'numeric',
+                              minute: '2-digit'
+                            })}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-[#6C757D]">Due back:</span>
+                          <span className="ml-1 font-medium text-[#212529]">
+                            {new Date(carLoans[0]?.dueBack).toLocaleDateString('en-AU', { 
+                              day: 'numeric', 
+                              month: 'short',
+                              hour: 'numeric',
+                              minute: '2-digit'
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {car.status === 'hold' && (
+                <div className="bg-gradient-to-r from-amber-50 to-amber-100 border border-amber-200 rounded-xl p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center flex-shrink-0">
+                      <AlertTriangle className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#212529] mb-1">Vehicle On Hold</h4>
+                      <div className="text-sm text-[#495057]">
+                        This vehicle is currently unavailable and requires attention before it can be loaned out.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {car.status === 'service' && (
+                <div className="bg-gradient-to-r from-red-50 to-red-100 border border-red-200 rounded-xl p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
+                      <Wrench className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#212529] mb-1">In Service</h4>
+                      <div className="text-sm text-[#495057]">
+                        This vehicle is currently being serviced and is not available for loan.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {car.status === 'cleaning' && (
+                <div className="bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 rounded-xl p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#212529] mb-1">Being Cleaned</h4>
+                      <div className="text-sm text-[#495057]">
+                        This vehicle is currently in the cleaning queue and will be available soon.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {car.status === 'available' && (
+                <div className="bg-gradient-to-r from-green-50 to-green-100 border border-green-200 rounded-xl p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#212529] mb-1">Available for Loan</h4>
+                      <div className="text-sm text-[#495057]">
+                        This vehicle is ready and available to be loaned out to customers.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
               {/* Vehicle Details */}
               <div className="bg-white border border-[#DEE2E6] rounded-xl p-6">
-                <h3 className="font-semibold text-[#212529] mb-4">Vehicle Details</h3>
-                <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                <h3 className="font-semibold text-[#212529] mb-4 flex items-center gap-2">
+                  <Settings className="w-5 h-5 text-[#6C757D]" />
+                  Technical Specifications
+                </h3>
+                <div className="grid grid-cols-3 gap-x-12 gap-y-4">
                   <div>
                     <div className="text-sm text-[#6C757D] mb-1">Registration</div>
                     <div className="font-mono font-semibold text-[#212529]">{car.rego}</div>
@@ -243,52 +411,89 @@ export function CarPortal({ carId, onClose }: CarPortalProps) {
                     <div className="font-semibold text-[#212529]">{car.bay || 'Not assigned'}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-[#6C757D] mb-1">Status</div>
-                    <span className={`inline-block px-2 py-1 rounded text-sm font-medium ${getStatusColor(car.status)}`}>
-                      {car.status.toUpperCase()}
-                    </span>
+                    <div className="text-sm text-[#6C757D] mb-1">Fuel Type</div>
+                    <div className="font-semibold text-[#212529]">{car.fuelType || 'Petrol'}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-[#6C757D] mb-1">Rego Expiry</div>
+                    <div className="text-sm text-[#6C757D] mb-1">Transmission</div>
+                    <div className="font-semibold text-[#212529]">{car.transmission || 'Automatic'}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-[#6C757D] mb-1">Registration Expiry</div>
                     <div className="font-semibold text-[#212529]">
                       {new Date(car.regoExpiry).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      {isRegoExpiringSoon && (
+                        <span className="ml-2 text-xs text-amber-600 font-normal">({daysToRegoExpiry} days)</span>
+                      )}
+                      {isRegoExpired && (
+                        <span className="ml-2 text-xs text-red-600 font-normal">(EXPIRED)</span>
+                      )}
                     </div>
                   </div>
+                  {car.vin && (
+                    <div className="col-span-2">
+                      <div className="text-sm text-[#6C757D] mb-1">VIN Number</div>
+                      <div className="font-mono font-semibold text-[#212529]">{car.vin}</div>
+                    </div>
+                  )}
+                  {car.odometer && (
+                    <div>
+                      <div className="text-sm text-[#6C757D] mb-1">Current Odometer</div>
+                      <div className="font-mono font-semibold text-[#212529]">{car.odometer.toLocaleString()} km</div>
+                    </div>
+                  )}
                 </div>
               </div>
               
               {/* Recent Activity */}
               <div className="bg-white border border-[#DEE2E6] rounded-xl p-6">
-                <h3 className="font-semibold text-[#212529] mb-4">Recent Activity</h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-[#212529] flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-[#6C757D]" />
+                    Recent Activity
+                  </h3>
+                  <button
+                    onClick={() => setActiveTab('activity')}
+                    className="text-sm text-[#3B82F6] hover:text-[#2563EB] font-medium"
+                  >
+                    View All
+                  </button>
+                </div>
                 <div className="space-y-3">
-                  {carActivityLogs.slice(0, 5).map(log => (
-                    <div key={log.id} className="flex items-start gap-3 pb-3 border-b border-[#F1F3F5] last:border-0 last:pb-0">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        log.action === 'checked-out' ? 'bg-blue-100' :
-                        log.action === 'checked-in' ? 'bg-green-100' :
-                        log.action === 'cleaned' ? 'bg-purple-100' :
-                        log.action === 'serviced' ? 'bg-orange-100' :
-                        'bg-gray-100'
-                      }`}>
-                        {log.action === 'checked-out' && <User className="w-4 h-4 text-blue-600" />}
-                        {log.action === 'checked-in' && <CheckCircle className="w-4 h-4 text-green-600" />}
-                        {log.action === 'cleaned' && <CheckCircle className="w-4 h-4 text-purple-600" />}
-                        {log.action === 'serviced' && <Wrench className="w-4 h-4 text-orange-600" />}
-                        {log.action === 'hold' && <AlertCircle className="w-4 h-4 text-amber-600" />}
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-medium text-[#212529]">{log.description}</div>
-                        <div className="text-xs text-[#6C757D] mt-0.5">
-                          {new Date(log.timestamp).toLocaleString('en-AU', { 
-                            day: 'numeric', 
-                            month: 'short', 
-                            hour: 'numeric', 
-                            minute: '2-digit' 
-                          })} • {log.user}
+                  {carActivityLogs.slice(0, 5).length === 0 ? (
+                    <div className="text-center py-8 text-[#6C757D]">
+                      No activity recorded yet
+                    </div>
+                  ) : (
+                    carActivityLogs.slice(0, 5).map(log => (
+                      <div key={log.id} className="flex items-start gap-3 pb-3 border-b border-[#F1F3F5] last:border-0 last:pb-0">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                          log.action === 'checked-out' ? 'bg-blue-100' :
+                          log.action === 'checked-in' ? 'bg-green-100' :
+                          log.action === 'cleaned' ? 'bg-purple-100' :
+                          log.action === 'serviced' ? 'bg-orange-100' :
+                          'bg-gray-100'
+                        }`}>
+                          {log.action === 'checked-out' && <User className="w-4 h-4 text-blue-600" />}
+                          {log.action === 'checked-in' && <CheckCircle className="w-4 h-4 text-green-600" />}
+                          {log.action === 'cleaned' && <CheckCircle className="w-4 h-4 text-purple-600" />}
+                          {log.action === 'serviced' && <Wrench className="w-4 h-4 text-orange-600" />}
+                          {log.action === 'hold' && <AlertCircle className="w-4 h-4 text-amber-600" />}
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-[#212529]">{log.description}</div>
+                          <div className="text-xs text-[#6C757D] mt-0.5">
+                            {new Date(log.timestamp).toLocaleString('en-AU', { 
+                              day: 'numeric', 
+                              month: 'short', 
+                              hour: 'numeric', 
+                              minute: '2-digit' 
+                            })} • {log.user}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                  )}
                 </div>
               </div>
             </div>

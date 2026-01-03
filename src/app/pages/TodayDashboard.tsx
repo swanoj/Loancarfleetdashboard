@@ -61,6 +61,44 @@ export function TodayDashboard() {
     car.model.toLowerCase().includes(searchQuery.toLowerCase())
   );
   
+  // Filter expected returns by search
+  const filteredReturns = dueTodayAndOverdue.filter(loan => {
+    if (searchQuery === '') return true;
+    const car = cars.find(c => c.id === loan.carId);
+    if (!car) return false;
+    return (
+      car.rego.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      car.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      car.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      loan.customer.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+  
+  // Filter cleaning jobs by search
+  const filteredCleaningJobs = cleaningJobs.filter(job => {
+    if (searchQuery === '') return true;
+    const car = cars.find(c => c.id === job.carId);
+    if (!car) return false;
+    return (
+      car.rego.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      car.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      car.model.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+  
+  // Filter hold items by search
+  const filteredHoldItems = holdItems.filter(item => {
+    if (searchQuery === '') return true;
+    const car = cars.find(c => c.id === item.carId);
+    if (!car) return false;
+    return (
+      car.rego.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      car.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      car.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.reason.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+  
   const handleCheckOut = () => {
     if (selectedCarId) {
       setShowCheckOut(true);
@@ -68,63 +106,63 @@ export function TodayDashboard() {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#F8F9FA]">
-      {/* Enhanced Header */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-[#E5E7EB]/50 shadow-sm">
-        <div className="px-8 py-4">
-          <div className="flex items-center justify-between mb-4">
+    <div className="min-h-screen bg-[#FAFAFA]">
+      {/* Enhanced Header - Reduced Height */}
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E5E7EB]">
+        <div className="px-8 py-3">
+          <div className="flex items-center justify-between mb-3">
             <div>
-              <h1 className="text-2xl font-bold text-[#1A1A1D] mb-1">Today's Dashboard</h1>
-              <p className="text-sm text-[#6B7280] flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
+              <h1 className="text-xl font-semibold text-[#1A1A1D] mb-0.5">Today's Dashboard</h1>
+              <p className="text-xs text-[#6B7280] flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5" />
                 Saturday, 4 January 2025
                 <span className="ml-2 flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
+                  <Clock className="w-3.5 h-3.5" />
                   11:30 AM
                 </span>
               </p>
             </div>
             
             <div className="flex items-center gap-3">
-              <button className="relative p-2 rounded-xl hover:bg-[#F8F9FA] transition-colors">
-                <Bell className="w-5 h-5 text-[#6B7280]" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#F97066] rounded-full animate-pulse"></span>
+              <button className="relative p-2 rounded-lg hover:bg-[#F8F9FA] transition-colors">
+                <Bell className="w-4 h-4 text-[#6B7280]" />
+                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#EF4444] rounded-full"></span>
               </button>
               
-              <div className="flex items-center gap-3 px-4 py-2 bg-gradient-to-br from-[#F97066] to-[#FDA29B] rounded-xl shadow-lg shadow-[#F9706640] text-white">
-                <div className="w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
-                  <span className="text-sm font-semibold">O</span>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg">
+                <div className="w-6 h-6 bg-[#E5E7EB] rounded-full flex items-center justify-center">
+                  <span className="text-xs font-medium text-[#1A1A1D]">O</span>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold">Oliver</div>
-                  <div className="text-xs opacity-90">Manager</div>
+                  <div className="text-xs font-medium text-[#1A1A1D]">Oliver</div>
+                  <div className="text-[10px] text-[#6B7280]">Manager</div>
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Quick Actions Bar */}
+          {/* Quick Actions Bar - Search Dominant */}
           <div className="flex items-center gap-3">
-            <div className="relative flex-1 max-w-md">
+            <div className="relative flex-1 max-w-xl">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
               <input
                 type="text"
-                placeholder="Search by rego, make, or model..."
+                placeholder="Search vehicles by rego, make, or model..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white border border-[#E5E7EB] rounded-xl pl-10 pr-4 py-2.5 text-sm text-[#1A1A1D] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#F97066] focus:ring-4 focus:ring-[#F9706620] transition-all"
+                className="w-full bg-white border border-[#E5E7EB] rounded-lg pl-10 pr-4 py-2 text-sm text-[#1A1A1D] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F620] transition-all"
               />
             </div>
             
-            <div className="flex items-center gap-2 bg-white border border-[#E5E7EB] rounded-xl p-1">
+            <div className="flex items-center gap-1.5 bg-white border border-[#E5E7EB] rounded-lg p-0.5">
               {(['all', 'urgent', 'today'] as const).map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
                     activeFilter === filter
-                      ? 'bg-[#F97066] text-white shadow-sm'
-                      : 'text-[#6B7280] hover:bg-[#F8F9FA]'
+                      ? 'bg-[#F8F9FA] text-[#1A1A1D] shadow-sm'
+                      : 'text-[#6B7280] hover:text-[#1A1A1D]'
                   }`}
                 >
                   {filter === 'all' && 'All'}
@@ -137,7 +175,7 @@ export function TodayDashboard() {
             <Button 
               onClick={handleCheckOut} 
               disabled={!selectedCarId}
-              className="shadow-lg shadow-[#F9706640]"
+              className="bg-[#3B82F6] hover:bg-[#2563EB] shadow-sm"
             >
               <Plus className="w-4 h-4" />
               Check Out Vehicle
@@ -148,72 +186,72 @@ export function TodayDashboard() {
       
       {/* Main Content */}
       <main className="px-8 py-6 space-y-6">
-        {/* Hero KPI Cards with Gradients */}
+        {/* Refined KPI Cards - Neutral with Accent */}
         <div className="grid grid-cols-5 gap-4">
-          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-5 text-white shadow-xl shadow-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/30 transition-all cursor-pointer group">
+          <div className="group bg-white border-l-2 border-l-emerald-500 rounded-lg p-4 shadow-sm hover:shadow-md transition-all cursor-pointer">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <CheckCircle2 className="w-5 h-5" />
+              <div className="w-7 h-7 bg-emerald-50 rounded-lg flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               </div>
-              <TrendingUp className="w-4 h-4 opacity-70" />
+              <TrendingUp className="w-3 h-3 text-[#9CA3AF]" />
             </div>
-            <div className="text-4xl font-bold mb-1">{availableCars.length}</div>
-            <div className="text-sm opacity-90 font-medium">Ready to Go</div>
-            <div className="mt-2 text-xs opacity-75">+3 from yesterday</div>
+            <div className="font-mono text-3xl font-bold text-[#1A1A1D] mb-1">{availableCars.length}</div>
+            <div className="text-xs font-medium text-[#6B7280] mb-1">Ready to Go</div>
+            <div className="text-[10px] text-[#9CA3AF]">+3 from yesterday</div>
           </div>
           
-          <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white shadow-xl shadow-blue-500/20 hover:shadow-2xl hover:shadow-blue-500/30 transition-all cursor-pointer group">
+          <div className="group bg-white border-l-2 border-l-blue-500 rounded-lg p-4 shadow-sm hover:shadow-md transition-all cursor-pointer">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <ArrowRight className="w-5 h-5" />
+              <div className="w-7 h-7 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                <ArrowRight className="w-4 h-4 text-blue-600" />
               </div>
-              <div className="text-xs bg-white/20 px-2 py-1 rounded-full">{Math.round((outCars.length / cars.length) * 100)}%</div>
+              <div className="text-[10px] font-mono text-[#6B7280] bg-[#F8F9FA] px-1.5 py-0.5 rounded">{Math.round((outCars.length / cars.length) * 100)}%</div>
             </div>
-            <div className="text-4xl font-bold mb-1">{outCars.length}</div>
-            <div className="text-sm opacity-90 font-medium">Currently Out</div>
-            <div className="mt-2 text-xs opacity-75">On loan to customers</div>
+            <div className="font-mono text-3xl font-bold text-[#1A1A1D] mb-1">{outCars.length}</div>
+            <div className="text-xs font-medium text-[#6B7280] mb-1">Currently Out</div>
+            <div className="text-[10px] text-[#9CA3AF]">On loan to customers</div>
           </div>
           
-          <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl p-5 text-white shadow-xl shadow-amber-500/20 hover:shadow-2xl hover:shadow-amber-500/30 transition-all cursor-pointer group">
+          <div className="group bg-white border-l-2 border-l-amber-500 rounded-lg p-4 shadow-sm hover:shadow-md transition-all cursor-pointer">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Clock className="w-5 h-5" />
+              <div className="w-7 h-7 bg-amber-50 rounded-lg flex items-center justify-center group-hover:bg-amber-100 transition-colors">
+                <Clock className="w-4 h-4 text-amber-600" />
               </div>
-              {dueToday.length > 0 && <div className="w-2 h-2 bg-white rounded-full animate-pulse" />}
+              {dueToday.length > 0 && <div className="w-1.5 h-1.5 bg-amber-500 rounded-full" />}
             </div>
-            <div className="text-4xl font-bold mb-1">{dueToday.length}</div>
-            <div className="text-sm opacity-90 font-medium">Due Today</div>
-            <div className="mt-2 text-xs opacity-75">Expected returns</div>
+            <div className="font-mono text-3xl font-bold text-[#1A1A1D] mb-1">{dueToday.length}</div>
+            <div className="text-xs font-medium text-[#6B7280] mb-1">Due Today</div>
+            <div className="text-[10px] text-[#9CA3AF]">Expected returns</div>
           </div>
           
-          <div className="bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl p-5 text-white shadow-xl shadow-red-500/20 hover:shadow-2xl hover:shadow-red-500/30 transition-all cursor-pointer group">
+          <div className="group bg-white border-l-2 border-l-red-500 rounded-lg p-4 shadow-sm hover:shadow-md transition-all cursor-pointer">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <AlertCircle className="w-5 h-5" />
+              <div className="w-7 h-7 bg-red-50 rounded-lg flex items-center justify-center group-hover:bg-red-100 transition-colors">
+                <AlertCircle className="w-4 h-4 text-red-600" />
               </div>
               {overdue.length > 0 && (
-                <div className="flex gap-1">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                  <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.3s' }} />
-                  <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.6s' }} />
+                <div className="flex gap-0.5">
+                  <span className="w-1 h-1 bg-red-500 rounded-full" />
+                  <span className="w-1 h-1 bg-red-500 rounded-full" />
+                  <span className="w-1 h-1 bg-red-500 rounded-full" />
                 </div>
               )}
             </div>
-            <div className="text-4xl font-bold mb-1">{overdue.length}</div>
-            <div className="text-sm opacity-90 font-medium">Overdue</div>
-            <div className="mt-2 text-xs opacity-75">Requires attention</div>
+            <div className="font-mono text-3xl font-bold text-[#1A1A1D] mb-1">{overdue.length}</div>
+            <div className="text-xs font-medium text-[#6B7280] mb-1">Overdue</div>
+            <div className="text-[10px] text-[#9CA3AF]">Requires attention</div>
           </div>
           
-          <div className="bg-gradient-to-br from-sky-500 to-cyan-600 rounded-2xl p-5 text-white shadow-xl shadow-sky-500/20 hover:shadow-2xl hover:shadow-sky-500/30 transition-all cursor-pointer group">
+          <div className="group bg-white border-l-2 border-l-cyan-500 rounded-lg p-4 shadow-sm hover:shadow-md transition-all cursor-pointer">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Sparkles className="w-5 h-5" />
+              <div className="w-7 h-7 bg-cyan-50 rounded-lg flex items-center justify-center group-hover:bg-cyan-100 transition-colors">
+                <Sparkles className="w-4 h-4 text-cyan-600" />
               </div>
-              <div className="text-xs bg-white/20 px-2 py-1 rounded-full">{cleaningJobs.length}</div>
+              <div className="text-[10px] font-mono text-[#6B7280] bg-[#F8F9FA] px-1.5 py-0.5 rounded">{cleaningJobs.length}</div>
             </div>
-            <div className="text-4xl font-bold mb-1">{cleaningCars.length}</div>
-            <div className="text-sm opacity-90 font-medium">In Cleaning</div>
-            <div className="mt-2 text-xs opacity-75">{cleaningJobs.filter(j => j.priority === 'urgent').length} urgent</div>
+            <div className="font-mono text-3xl font-bold text-[#1A1A1D] mb-1">{cleaningCars.length}</div>
+            <div className="text-xs font-medium text-[#6B7280] mb-1">In Cleaning</div>
+            <div className="text-[10px] text-[#9CA3AF]">{cleaningJobs.filter(j => j.priority === 'urgent').length} urgent</div>
           </div>
         </div>
         
@@ -292,9 +330,9 @@ export function TodayDashboard() {
               </div>
               
               <div className="p-6">
-                {dueTodayAndOverdue.length > 0 ? (
+                {filteredReturns.length > 0 ? (
                   <div className="space-y-2">
-                    {dueTodayAndOverdue.map(loan => {
+                    {filteredReturns.map(loan => {
                       const car = cars.find(c => c.id === loan.carId);
                       if (!car) return null;
                       const dueTime = new Date(loan.dueBack);
@@ -390,9 +428,9 @@ export function TodayDashboard() {
               </div>
               
               <div className="p-6">
-                {cleaningJobs.length > 0 ? (
+                {filteredCleaningJobs.length > 0 ? (
                   <div className="space-y-3">
-                    {cleaningJobs
+                    {filteredCleaningJobs
                       .filter(job => cars.find(c => c.id === job.carId))
                       .map(job => {
                         const car = cars.find(c => c.id === job.carId)!;
@@ -450,9 +488,9 @@ export function TodayDashboard() {
               </div>
               
               <div className="p-6">
-                {holdItems.length > 0 ? (
+                {filteredHoldItems.length > 0 ? (
                   <div className="space-y-3">
-                    {holdItems
+                    {filteredHoldItems
                       .filter(item => cars.find(c => c.id === item.carId))
                       .map(item => {
                         const car = cars.find(c => c.id === item.carId)!;

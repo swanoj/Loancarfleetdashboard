@@ -3,11 +3,13 @@ import { TodayDashboard } from './pages/TodayDashboard';
 import { WasherConsole } from './pages/WasherConsole';
 import { FleetManagement } from './pages/FleetManagement';
 import { Analytics } from './pages/Analytics';
+import { LiveTracking } from './pages/LiveTracking';
+import { CustomerHubEntry } from './pages/CustomerHubEntry';
 import FleetScanApp from './fleetscan/FleetScanApp';
-import { LayoutDashboard, Droplet, Database, Camera, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, Droplet, Database, Camera, BarChart3, Navigation, Users } from 'lucide-react';
 import { FleetProvider } from './context/FleetContext';
 
-type Page = 'dashboard' | 'washer' | 'fleet' | 'analytics' | 'fleetscan';
+type Page = 'dashboard' | 'washer' | 'fleet' | 'analytics' | 'fleetscan' | 'tracking' | 'customerhub';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
@@ -27,6 +29,10 @@ export default function App() {
         return <FleetManagement />;
       case 'analytics':
         return <Analytics />;
+      case 'tracking':
+        return <LiveTracking />;
+      case 'customerhub':
+        return <CustomerHubEntry />;
       default:
         return <TodayDashboard />;
     }
@@ -109,6 +115,30 @@ export default function App() {
               >
                 <Camera className="w-5 h-5" />
                 <span>Fleet Scan</span>
+              </button>
+              
+              <button
+                onClick={() => setCurrentPage('tracking')}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-sm font-medium ${
+                  currentPage === 'tracking'
+                    ? 'bg-gradient-to-r from-[#F97066] to-[#FDA29B] text-white shadow-lg shadow-[#F9706640]'
+                    : 'text-[#6B7280] hover:bg-[#F8F9FA] hover:text-[#1A1A1D]'
+                }`}
+              >
+                <Navigation className="w-5 h-5" />
+                <span>Live Tracking</span>
+              </button>
+              
+              <button
+                onClick={() => setCurrentPage('customerhub')}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-sm font-medium ${
+                  currentPage === 'customerhub'
+                    ? 'bg-gradient-to-r from-[#F97066] to-[#FDA29B] text-white shadow-lg shadow-[#F9706640]'
+                    : 'text-[#6B7280] hover:bg-[#F8F9FA] hover:text-[#1A1A1D]'
+                }`}
+              >
+                <Users className="w-5 h-5" />
+                <span>Customer Hub</span>
               </button>
             </div>
           </nav>

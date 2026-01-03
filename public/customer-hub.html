@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Fleet Command - Loan Car Service">
+  <meta name="theme-color" content="#3B82F6">
+  <title>Fleet Command - Customer Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #EFF6FF 0%, #E0E7FF 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    
+    .container {
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+      padding: 2rem;
+      text-align: center;
+      color: white;
+    }
+    
+    .icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    
+    .content {
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .subtitle {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 0.875rem;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .button {
+      width: 100%;
+      background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: block;
+      margin: 1rem 0;
+    }
+    
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+    
+    .button:active {
+      transform: translateY(0);
+    }
+    
+    .disclaimer {
+      font-size: 0.75rem;
+      color: #6B7280;
+      margin-top: 1rem;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <!-- Header -->
+      <div class="header">
+        <div class="icon">🚗</div>
+        <h1>Fleet Command</h1>
+        <p class="subtitle">Loan Car Service</p>
+      </div>
+      
+      <!-- Content -->
+      <div class="content">
+        <div class="badge">
+          ⚠️ Loan Vehicle Ready
+        </div>
+        
+        <h2 style="font-size: 1.25rem; margin: 0 0 0.5rem 0;">Your Loan Car is Ready!</h2>
+        <p style="color: #6B7280; margin: 0 0 1.5rem 0;">
+          Please review the loan terms and upload your documents to get started.
+        </p>
+        
+        <button class="button" onclick="redirectToApp()">
+          <span id="buttonText">View Loan Details</span>
+          <span id="buttonLoading" class="loading hidden"></span>
+        </button>
+        
+        <p class="disclaimer">
+          By continuing, you agree to our terms and conditions
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function redirectToApp() {
+      // Get loan ID from URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const loanId = urlParams.get('loan') || 'DEMO';
+      
+      // Show loading state
+      document.getElementById('buttonText').classList.add('hidden');
+      document.getElementById('buttonLoading').classList.remove('hidden');
+      
+      // Redirect to main app with customer hub route
+      setTimeout(() => {
+        // In production, this would redirect to your React app
+        // For now, it opens the main app
+        window.location.href = `/?page=customerhub&loan=${loanId}`;
+      }, 500);
+    }
+    
+    // Auto-redirect if accessed directly without user interaction (optional)
+    // Uncomment the line below to auto-redirect after 3 seconds
+    // setTimeout(redirectToApp, 3000);
+  </script>
+</body>
+</html>
