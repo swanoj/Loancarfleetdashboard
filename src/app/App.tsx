@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TodayDashboard } from './pages/TodayDashboard';
 import { WasherConsole } from './pages/WasherConsole';
 import { FleetManagement } from './pages/FleetManagement';
 import { Analytics } from './pages/Analytics';
 import { LiveTracking } from './pages/LiveTracking';
 import { CustomerHubEntry } from './pages/CustomerHubEntry';
+import { CustomerHubStandalone } from './pages/CustomerHubStandalone';
 import FleetScanApp from './fleetscan/FleetScanApp';
 import { LayoutDashboard, Droplet, Database, Camera, BarChart3, Navigation, Users } from 'lucide-react';
 import { FleetProvider } from './context/FleetContext';
@@ -14,9 +15,29 @@ type Page = 'dashboard' | 'washer' | 'fleet' | 'analytics' | 'fleetscan' | 'trac
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
   
+  // Check URL for customer hub access
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get('page');
+    
+    if (page === 'customerhub') {
+      setCurrentPage('customerhub');
+    }
+  }, []);
+  
+  // If customer hub standalone route (URL path-based)
+  if (window.location.pathname === '/customer-hub' || window.location.pathname === '/hub') {
+    return <CustomerHubStandalone />;
+  }
+  
   // If FleetScan is active, render it full-screen without sidebar
   if (currentPage === 'fleetscan') {
     return <FleetScanApp onBackToHome={() => setCurrentPage('dashboard')} />;
+  }
+  
+  // If customer hub is active via query param, render standalone
+  if (currentPage === 'customerhub') {
+    return <CustomerHubStandalone />;
   }
   
   const renderPage = () => {

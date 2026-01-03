@@ -1,0 +1,26 @@
+/* Leaflet CSS - Required for map functionality */
+@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
+/* Fix marker icon paths */
+.leaflet-default-icon-path {
+  background-image: url('https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png');
+}
+
+/* Custom marker styling for Fleet Command */
+.fleet-marker {
+  filter: drop-shadow(0 2px 8px rgba(249, 112, 102, 0.4));
+}
+
+.fleet-popup {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-size: 14px;
+}

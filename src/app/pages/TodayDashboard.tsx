@@ -23,6 +23,7 @@ import { Button } from '../components/Button';
 import { CarIcon } from '../components/CarIcon';
 import { CheckOutModal } from './CheckOutModal';
 import { Toast } from '../components/Toast';
+import { LiveFleetMap } from '../components/LiveFleetMap';
 
 export function TodayDashboard() {
   const { cars, loans, cleaningJobs, holdItems, resolveHold } = useFleet();
@@ -252,6 +253,26 @@ export function TodayDashboard() {
             <div className="font-mono text-3xl font-bold text-[#1A1A1D] mb-1">{cleaningCars.length}</div>
             <div className="text-xs font-medium text-[#6B7280] mb-1">In Cleaning</div>
             <div className="text-[10px] text-[#9CA3AF]">{cleaningJobs.filter(j => j.priority === 'urgent').length} urgent</div>
+          </div>
+        </div>
+        
+        {/* Live Fleet Map */}
+        <div className="bg-white rounded-2xl shadow-lg border border-[#E5E7EB]/50 overflow-hidden p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-lg font-bold text-[#1A1A1D] flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-[#F97066] to-[#FDA29B] rounded-lg flex items-center justify-center">
+                  <MapPin className="w-4 h-4 text-white" />
+                </div>
+                Live Fleet Tracking
+              </h2>
+              <p className="text-sm text-[#6B7280] mt-0.5">
+                Real-time GPS location of all active loan vehicles
+              </p>
+            </div>
+          </div>
+          <div className="h-[600px]">
+            <LiveFleetMap />
           </div>
         </div>
         
