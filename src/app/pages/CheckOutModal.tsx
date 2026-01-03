@@ -108,15 +108,15 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
     >
       <div className="space-y-6">
         {/* Vehicle Preview */}
-        <div className="bg-[#0C0C0D] border border-[#2A2A2E] rounded-xl p-6 text-center">
+        <div className="bg-[#F8F9FA] border border-[#E5E7EB] rounded-xl p-6 text-center">
           <div className="flex items-center justify-center gap-3 mb-2">
             <CarIcon model={car.model} className="w-7 h-7 text-[#F97066]" />
-            <div className="font-mono text-2xl font-bold text-white">{car.rego}</div>
+            <div className="font-mono text-2xl font-bold text-[#1A1A1D]">{car.rego}</div>
           </div>
-          <div className="text-[#A1A1AA] mb-1">
+          <div className="text-[#6B7280] mb-1">
             {car.year} {car.make} {car.model}
           </div>
-          <div className="flex items-center justify-center gap-3 text-sm text-[#71717A]">
+          <div className="flex items-center justify-center gap-3 text-sm text-[#9CA3AF]">
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: car.colorHex }} />
               <span className="capitalize">{car.color}</span>
@@ -141,7 +141,7 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
             value={customer}
             onChange={(e) => setCustomer(e.target.value)}
           />
-          <button className="mt-2 text-sm text-[#F97066] hover:text-[#FDA29B] flex items-center gap-1">
+          <button className="mt-2 text-sm text-[#F97066] hover:text-[#E85F55] flex items-center gap-1 font-medium">
             <Plus className="w-4 h-4" />
             New Customer
           </button>
@@ -149,7 +149,7 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
         
         {/* Driver Selection */}
         <div>
-          <label className="text-sm font-medium text-[#FAFAFA] block mb-3">Driver</label>
+          <label className="text-sm font-medium text-[#1A1A1D] block mb-3">Driver</label>
           <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -160,7 +160,7 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
                 onChange={() => setDriverType('same')}
                 className="w-4 h-4 accent-[#F97066]"
               />
-              <span className="text-sm text-[#FAFAFA]">Same as customer</span>
+              <span className="text-sm text-[#1A1A1D]">Same as customer</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -171,7 +171,7 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
                 onChange={() => setDriverType('different')}
                 className="w-4 h-4 accent-[#F97066]"
               />
-              <span className="text-sm text-[#FAFAFA]">Different driver</span>
+              <span className="text-sm text-[#1A1A1D]">Different driver</span>
             </label>
           </div>
           {driverType === 'different' && (
@@ -186,13 +186,13 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
         
         {/* Due Back */}
         <div>
-          <label className="text-sm font-medium text-[#FAFAFA] block mb-3">Due Back</label>
+          <label className="text-sm font-medium text-[#1A1A1D] block mb-3">Due Back</label>
           <ToggleGroup
             options={durationOptions}
             value={duration}
             onChange={setDuration}
           />
-          <p className="mt-2 text-sm text-[#A1A1AA]">
+          <p className="mt-2 text-sm text-[#6B7280]">
             Returns: {getReturnTimeDisplay()}
           </p>
         </div>
@@ -217,11 +217,11 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
             onChange={(e) => setTermsAgreed(e.target.checked)}
             className="mt-1 w-4 h-4 accent-[#F97066]"
           />
-          <span className="text-sm text-[#FAFAFA]">Customer agrees to loan terms</span>
+          <span className="text-sm text-[#1A1A1D]">Customer agrees to loan terms</span>
         </label>
         
         {/* Dashboard Scan */}
-        <div className="border-t border-[#2A2A2E] pt-6">
+        <div className="border-t border-[#E5E7EB] pt-6">
           <Button
             variant="secondary"
             onClick={() => setShowDashboardScan(true)}
@@ -231,15 +231,15 @@ export function CheckOutModal({ isOpen, onClose, carId, onSuccess }: CheckOutMod
             {dashboardData ? 'Update Dashboard Scan' : 'Scan Dashboard (Optional)'}
           </Button>
           {dashboardData && (
-            <div className="mt-3 bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg p-4">
+            <div className="mt-3 bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg p-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <div className="text-[#71717A] mb-1">Odometer</div>
-                  <div className="text-white font-medium">{dashboardData.odometer.toLocaleString()} km</div>
+                  <div className="text-[#9CA3AF] mb-1 font-medium">Odometer</div>
+                  <div className="text-[#1A1A1D] font-semibold">{dashboardData.odometer.toLocaleString()} km</div>
                 </div>
                 <div>
-                  <div className="text-[#71717A] mb-1">Fuel Level</div>
-                  <div className="text-white font-medium">{dashboardData.fuelLevel}%</div>
+                  <div className="text-[#9CA3AF] mb-1 font-medium">Fuel Level</div>
+                  <div className="text-[#1A1A1D] font-semibold">{dashboardData.fuelLevel}%</div>
                 </div>
               </div>
             </div>

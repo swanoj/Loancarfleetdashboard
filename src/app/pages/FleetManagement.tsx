@@ -74,11 +74,11 @@ export function FleetManagement() {
     });
   
   return (
-    <div className="min-h-screen bg-[#0C0C0D]">
+    <div className="min-h-screen bg-[#F8F9FA]">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#0C0C0D] border-b border-[#2A2A2E]">
-        <div className="px-8 py-4">
-          <h1 className="text-2xl font-semibold text-white mb-4">Fleet Management</h1>
+      <header className="sticky top-0 z-40 bg-white border-b border-[#E5E7EB] shadow-sm">
+        <div className="px-6 py-3">
+          <h1 className="text-xl font-semibold text-[#1A1A1D] mb-3">Fleet Management</h1>
           
           {/* Filter Bar */}
           <div className="flex items-center gap-3">
@@ -86,7 +86,7 @@ export function FleetManagement() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="appearance-none bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2 pr-10 text-[#FAFAFA] text-sm focus:outline-none focus:border-[#F97066]"
+                className="appearance-none bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 pr-10 text-[#1A1A1D] text-sm focus:outline-none focus:border-[#F97066] focus:ring-2 focus:ring-[#F9706620]"
               >
                 <option value="all">All Status</option>
                 <option value="available">Available</option>
@@ -95,21 +95,21 @@ export function FleetManagement() {
                 <option value="service">Service</option>
                 <option value="cleaning">Cleaning</option>
               </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717A] pointer-events-none" />
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF] pointer-events-none" />
             </div>
             
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717A]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
               <input
                 type="text"
                 placeholder="Search by rego, make, or model..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#141416] border border-[#2A2A2E] rounded-lg pl-10 pr-4 py-2 text-[#FAFAFA] text-sm placeholder:text-[#71717A] focus:outline-none focus:border-[#F97066]"
+                className="w-full bg-white border border-[#E5E7EB] rounded-lg pl-10 pr-4 py-2 text-[#1A1A1D] text-sm placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#F97066] focus:ring-2 focus:ring-[#F9706620]"
               />
             </div>
             
-            <div className="text-sm text-[#A1A1AA]">
+            <div className="text-sm text-[#6B7280] font-medium">
               {filteredCars.length} vehicles
             </div>
           </div>
@@ -117,35 +117,35 @@ export function FleetManagement() {
       </header>
       
       {/* Table */}
-      <main className="px-8 py-6">
-        <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl overflow-hidden">
+      <main className="px-6 py-4">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-[#0C0C0D]">
+              <thead className="bg-[#F8F9FA]">
                 <tr>
                   <th 
-                    className="text-left px-6 py-4 text-xs uppercase tracking-wide text-[#71717A] cursor-pointer hover:text-[#A1A1AA]"
+                    className="text-left px-4 py-3 text-xs uppercase tracking-wide text-[#9CA3AF] font-medium cursor-pointer hover:text-[#6B7280]"
                     onClick={() => handleSort('rego')}
                   >
                     Rego {sortField === 'rego' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </th>
                   <th 
-                    className="text-left px-6 py-4 text-xs uppercase tracking-wide text-[#71717A] cursor-pointer hover:text-[#A1A1AA]"
+                    className="text-left px-4 py-3 text-xs uppercase tracking-wide text-[#9CA3AF] font-medium cursor-pointer hover:text-[#6B7280]"
                     onClick={() => handleSort('make')}
                   >
                     Make/Model {sortField === 'make' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </th>
                   <th 
-                    className="text-left px-6 py-4 text-xs uppercase tracking-wide text-[#71717A] cursor-pointer hover:text-[#A1A1AA]"
+                    className="text-left px-4 py-3 text-xs uppercase tracking-wide text-[#9CA3AF] font-medium cursor-pointer hover:text-[#6B7280]"
                     onClick={() => handleSort('status')}
                   >
                     Status {sortField === 'status' && (sortDirection === 'asc' ? '↑' : '↓')}
                   </th>
-                  <th className="text-left px-6 py-4 text-xs uppercase tracking-wide text-[#71717A]">
+                  <th className="text-left px-4 py-3 text-xs uppercase tracking-wide text-[#9CA3AF] font-medium">
                     Bay
                   </th>
                   <th 
-                    className="text-left px-6 py-4 text-xs uppercase tracking-wide text-[#71717A] cursor-pointer hover:text-[#A1A1AA]"
+                    className="text-left px-4 py-3 text-xs uppercase tracking-wide text-[#9CA3AF] font-medium cursor-pointer hover:text-[#6B7280]"
                     onClick={() => handleSort('expiry')}
                   >
                     Rego Expiry {sortField === 'expiry' && (sortDirection === 'asc' ? '↑' : '↓')}
@@ -161,23 +161,23 @@ export function FleetManagement() {
                   return (
                     <tr 
                       key={car.id}
-                      className="border-t border-[#1A1A1D] hover:bg-[#1A1A1D] transition-colors cursor-pointer"
+                      className="border-t border-[#E5E7EB] hover:bg-[#F8F9FA] transition-colors cursor-pointer"
                       onClick={() => setSelectedCarId(car.id)}
                     >
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <CarIcon model={car.model} className="w-5 h-5 text-[#71717A]" />
-                          <span className="font-mono text-white">{car.rego}</span>
+                          <CarIcon model={car.model} className="w-4 h-4 text-[#9CA3AF]" />
+                          <span className="font-mono text-[#1A1A1D] font-medium">{car.rego}</span>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="text-[#FAFAFA]">{car.make} {car.model}</div>
-                        <div className="text-sm text-[#A1A1AA] flex items-center gap-2 mt-1">
+                      <td className="px-4 py-3">
+                        <div className="text-[#1A1A1D] font-medium">{car.make} {car.model}</div>
+                        <div className="text-sm text-[#6B7280] flex items-center gap-2 mt-0.5">
                           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: car.colorHex }} />
                           {car.year} • {car.color}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <StatusBadge variant={car.status}>
                           {car.status === 'available' ? 'Available' : 
                            car.status === 'out' ? 'Out' :
@@ -186,15 +186,15 @@ export function FleetManagement() {
                            'Cleaning'}
                         </StatusBadge>
                       </td>
-                      <td className="px-6 py-4">
-                        <span className="text-[#A1A1AA]">{car.bay || '—'}</span>
+                      <td className="px-4 py-3">
+                        <span className="text-[#6B7280]">{car.bay || '—'}</span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <span className={`${
-                            isCritical ? 'text-[#EF4444]' :
-                            isWarning ? 'text-[#F59E0B]' :
-                            'text-[#A1A1AA]'
+                          <span className={`text-sm ${
+                            isCritical ? 'text-[#EF4444] font-semibold' :
+                            isWarning ? 'text-[#F59E0B] font-semibold' :
+                            'text-[#6B7280]'
                           }`}>
                             {expiryDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
                           </span>

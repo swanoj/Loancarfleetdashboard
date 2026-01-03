@@ -43,17 +43,17 @@ export function DamageCard({
 }: DamageCardProps) {
   return (
     <div 
-      className={`bg-[#141416] border rounded-xl p-4 ${
+      className={`bg-white border-2 rounded-xl p-4 shadow-sm ${
         isNew 
           ? 'border-[#F97066]' 
-          : 'border-[#2A2A2E]'
-      } ${onClick ? 'cursor-pointer hover:bg-[#1A1A1D]' : ''}`}
+          : 'border-[#E5E7EB]'
+      } ${onClick ? 'cursor-pointer hover:shadow-md hover:border-[#D1D5DB]' : ''} transition-all`}
       onClick={onClick}
     >
       <div className="flex gap-3">
         {/* Photo Thumbnail */}
         {photo && (
-          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-[#0C0C0D]">
+          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-[#F8F9FA] border border-[#E5E7EB]">
             <img src={photo} alt={type} className="w-full h-full object-cover" />
           </div>
         )}
@@ -64,17 +64,17 @@ export function DamageCard({
             <div className="flex items-center gap-2">
               <span className="text-xl">{damageTypeEmoji[type]}</span>
               <div>
-                <div className="text-[#FAFAFA] font-medium capitalize">
+                <div className="text-[#1A1A1D] font-semibold capitalize">
                   {type} - {location}
                 </div>
                 {size && (
-                  <div className="text-sm text-[#A1A1AA]">{size}</div>
+                  <div className="text-sm text-[#6B7280]">{size}</div>
                 )}
               </div>
             </div>
             
             {isNew && !confirmed && (
-              <div className="px-2 py-1 bg-[#F9706620] text-[#F97066] rounded text-xs font-medium">
+              <div className="px-2 py-1 bg-[#F9706620] text-[#F97066] rounded text-xs font-bold">
                 NEW
               </div>
             )}
@@ -82,7 +82,7 @@ export function DamageCard({
           
           <div className="flex items-center gap-2 mb-3">
             <div 
-              className="px-2 py-1 rounded text-xs font-medium"
+              className="px-2 py-1 rounded text-xs font-semibold"
               style={{ 
                 backgroundColor: `${severityColors[severity]}20`,
                 color: severityColors[severity]
@@ -100,7 +100,7 @@ export function DamageCard({
                   e.stopPropagation();
                   onConfirmNew();
                 }}
-                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-[#F97066] text-white rounded-lg text-sm font-medium hover:bg-[#FDA29B] transition-colors"
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-[#F97066] text-white rounded-lg text-sm font-medium hover:bg-[#E85F55] transition-colors shadow-sm"
               >
                 <CheckCircle className="w-4 h-4" />
                 Confirm New
@@ -110,7 +110,7 @@ export function DamageCard({
                   e.stopPropagation();
                   onMarkPreExisting();
                 }}
-                className="flex-1 px-3 py-2 bg-[#2A2A2E] text-[#A1A1AA] rounded-lg text-sm font-medium hover:bg-[#3A3A3F] transition-colors"
+                className="flex-1 px-3 py-2 bg-[#F8F9FA] border-2 border-[#E5E7EB] text-[#6B7280] rounded-lg text-sm font-medium hover:bg-white transition-colors"
               >
                 Pre-Existing
               </button>
@@ -118,7 +118,7 @@ export function DamageCard({
           )}
           
           {confirmed && (
-            <div className="flex items-center gap-2 text-sm text-[#10B981] mt-2">
+            <div className="flex items-center gap-2 text-sm text-green-600 mt-2 font-medium">
               <CheckCircle className="w-4 h-4" />
               <span>Confirmed</span>
             </div>

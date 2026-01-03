@@ -68,21 +68,21 @@ export function VehicleLookup({ onContinue }: VehicleLookupProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0C0C0D] flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
       {/* Header */}
       <header className="pt-12 pb-8 px-6 text-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-[#F97066] to-[#FDA29B] rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-gradient-to-br from-[#F97066] to-[#FDA29B] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
           <Camera className="w-8 h-8 text-white" />
         </div>
-        <h1 className="text-3xl font-bold text-[#FAFAFA] mb-2">Fleet Scan</h1>
-        <p className="text-[#A1A1AA]">Vehicle Inspection System</p>
+        <h1 className="text-3xl font-bold text-[#1A1A1D] mb-2">Fleet Scan</h1>
+        <p className="text-[#6B7280]">Vehicle Inspection System</p>
       </header>
 
       {/* Main Content */}
       <main className="flex-1 px-6 pb-6">
         <div className="max-w-md mx-auto space-y-6">
           <div>
-            <label className="block text-sm font-medium text-[#FAFAFA] mb-2">
+            <label className="block text-sm font-medium text-[#1A1A1D] mb-2">
               Enter Vehicle Registration
             </label>
             <div className="relative">
@@ -94,7 +94,7 @@ export function VehicleLookup({ onContinue }: VehicleLookupProps) {
                 onBlur={handleLookup}
                 placeholder="ABC-123"
                 maxLength={7}
-                className="w-full bg-[#141416] border border-[#2A2A2E] rounded-xl px-4 py-4 text-[#FAFAFA] text-lg font-mono text-center uppercase placeholder:text-[#71717A] focus:outline-none focus:border-[#F97066] transition-colors"
+                className="w-full bg-white border-2 border-[#E5E7EB] rounded-xl px-4 py-4 text-[#1A1A1D] text-lg font-mono text-center uppercase placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#F97066] focus:ring-4 focus:ring-[#F9706620] transition-all shadow-sm"
               />
               {loading && (
                 <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -109,9 +109,9 @@ export function VehicleLookup({ onContinue }: VehicleLookupProps) {
 
           <button
             onClick={() => setShowScanner(true)}
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#141416] border border-[#2A2A2E] rounded-xl text-[#FAFAFA] font-medium hover:bg-[#1A1A1D] hover:border-[#3A3A3F] transition-all"
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white border-2 border-[#E5E7EB] rounded-xl text-[#1A1A1D] font-medium hover:bg-[#F8F9FA] hover:border-[#F97066] transition-all shadow-sm"
           >
-            <Camera className="w-5 h-5" />
+            <Camera className="w-5 h-5 text-[#6B7280]" />
             Scan Rego Plate
           </button>
 
@@ -140,7 +140,7 @@ export function VehicleLookup({ onContinue }: VehicleLookupProps) {
           {/* Recent Vehicles */}
           {!currentVehicle && recentVehicles.length > 0 && (
             <div className="mt-8">
-              <h3 className="text-sm font-medium text-[#A1A1AA] mb-3">Recent Vehicles</h3>
+              <h3 className="text-sm font-medium text-[#6B7280] mb-3">Recent Vehicles</h3>
               <div className="space-y-2">
                 {recentVehicles.map((vehicle) => (
                   <button
@@ -148,13 +148,13 @@ export function VehicleLookup({ onContinue }: VehicleLookupProps) {
                     onClick={() => handleRecentVehicleClick(vehicle.rego)}
                     className="w-full text-left"
                   >
-                    <div className="bg-[#141416] border border-[#2A2A2E] rounded-lg p-3 hover:border-[#3A3A3F] transition-colors">
+                    <div className="bg-white border-2 border-[#E5E7EB] rounded-xl p-4 hover:border-[#F97066] hover:shadow-md transition-all">
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-mono text-sm text-[#FAFAFA] mb-1">{vehicle.rego}</div>
-                          <div className="text-xs text-[#71717A]">{vehicle.make} {vehicle.model}</div>
+                          <div className="font-mono text-sm text-[#1A1A1D] mb-1 font-medium">{vehicle.rego}</div>
+                          <div className="text-xs text-[#6B7280]">{vehicle.make} {vehicle.model}</div>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-[#71717A]" />
+                        <ArrowRight className="w-4 h-4 text-[#9CA3AF]" />
                       </div>
                     </div>
                   </button>
@@ -167,25 +167,33 @@ export function VehicleLookup({ onContinue }: VehicleLookupProps) {
 
       {/* Scanner Modal (placeholder) */}
       {showScanner && (
-        <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-          <div className="text-center p-6">
-            <p className="text-white mb-4">Camera scanner would open here</p>
-            <button
-              onClick={() => {
-                setShowScanner(false);
-                setRego('ABC-123');
-                setTimeout(() => handleLookup(), 100);
-              }}
-              className="px-6 py-3 bg-[#F97066] text-white rounded-lg"
-            >
-              Simulate Scan (ABC-123)
-            </button>
-            <button
-              onClick={() => setShowScanner(false)}
-              className="ml-3 px-6 py-3 bg-[#2A2A2E] text-white rounded-lg"
-            >
-              Cancel
-            </button>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+          <div className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[#F9706620] rounded-full flex items-center justify-center mx-auto mb-4">
+                <Camera className="w-8 h-8 text-[#F97066]" />
+              </div>
+              <h3 className="text-lg font-semibold text-[#1A1A1D] mb-2">Scan Registration Plate</h3>
+              <p className="text-[#6B7280] mb-6 text-sm">Camera scanner would open here</p>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    setShowScanner(false);
+                    setRego('ABC-123');
+                    setTimeout(() => handleLookup(), 100);
+                  }}
+                  className="w-full px-6 py-3 bg-[#F97066] text-white rounded-xl font-medium hover:bg-[#E85F55] transition-colors shadow-md"
+                >
+                  Simulate Scan (ABC-123)
+                </button>
+                <button
+                  onClick={() => setShowScanner(false)}
+                  className="w-full px-6 py-3 bg-[#F8F9FA] text-[#1A1A1D] border-2 border-[#E5E7EB] rounded-xl font-medium hover:bg-white transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

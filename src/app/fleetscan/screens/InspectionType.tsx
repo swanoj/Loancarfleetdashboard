@@ -31,19 +31,19 @@ export function InspectionType({ onBack, onContinue }: InspectionTypeProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0C0C0D] flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
       {/* Header */}
-      <header className="bg-[#141416] border-b border-[#2A2A2E] px-6 py-4">
+      <header className="bg-white border-b border-[#E5E7EB] px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between max-w-md mx-auto">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors"
+            className="flex items-center gap-2 text-[#6B7280] hover:text-[#1A1A1D] transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back
           </button>
-          <div className="px-3 py-1 bg-[#2A2A2E] rounded-lg">
-            <span className="font-mono text-sm text-[#FAFAFA]">{currentVehicle.rego}</span>
+          <div className="px-3 py-1 bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg">
+            <span className="font-mono text-sm text-[#1A1A1D] font-medium">{currentVehicle.rego}</span>
           </div>
         </div>
       </header>
@@ -52,25 +52,25 @@ export function InspectionType({ onBack, onContinue }: InspectionTypeProps) {
       <main className="flex-1 px-6 py-8">
         <div className="max-w-md mx-auto space-y-6">
           {/* Vehicle Info */}
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
-            <div className="text-lg font-semibold text-[#FAFAFA] mb-1">
+          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
+            <div className="text-lg font-semibold text-[#1A1A1D] mb-1">
               {currentVehicle.make} {currentVehicle.model}
             </div>
-            <div className="text-sm text-[#A1A1AA]">
+            <div className="text-sm text-[#6B7280]">
               {currentVehicle.year} • {currentVehicle.color}
             </div>
             {currentVehicle.lastInspection && (
-              <div className="mt-3 pt-3 border-t border-[#2A2A2E] text-sm text-[#71717A]">
-                Last inspected: {formatDate(currentVehicle.lastInspection)}
+              <div className="mt-3 pt-3 border-t border-[#E5E7EB] text-sm text-[#6B7280]">
+                Last inspected: <span className="font-medium text-[#1A1A1D]">{formatDate(currentVehicle.lastInspection)}</span>
               </div>
             )}
           </div>
 
-          <div className="h-px bg-[#2A2A2E]" />
+          <div className="h-px bg-[#E5E7EB]" />
 
           {/* Inspection Type Selection */}
           <div>
-            <h2 className="text-xl font-semibold text-[#FAFAFA] mb-4">
+            <h2 className="text-xl font-semibold text-[#1A1A1D] mb-4">
               What type of inspection?
             </h2>
 
@@ -78,20 +78,20 @@ export function InspectionType({ onBack, onContinue }: InspectionTypeProps) {
               {/* Pre-Loan */}
               <button
                 onClick={() => handleTypeSelect('pre-loan')}
-                className="w-full bg-[#141416] border-2 border-[#2A2A2E] rounded-xl p-6 hover:border-[#F97066] hover:bg-[#1A1A1D] transition-all group"
+                className="w-full bg-white border-2 border-[#E5E7EB] rounded-xl p-6 hover:border-[#F97066] hover:shadow-md transition-all group"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-[#F9706620] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#F9706630] transition-colors">
                     <LogOut className="w-6 h-6 text-[#F97066]" />
                   </div>
                   <div className="flex-1 text-left">
-                    <div className="text-lg font-semibold text-[#FAFAFA] mb-1">
+                    <div className="text-lg font-semibold text-[#1A1A1D] mb-1">
                       Pre-Loan Inspection
                     </div>
-                    <div className="text-sm text-[#A1A1AA]">
+                    <div className="text-sm text-[#6B7280]">
                       Taking the vehicle out for a loan
                     </div>
-                    <div className="mt-3 text-xs text-[#71717A]">
+                    <div className="mt-3 text-xs text-[#9CA3AF]">
                       Document condition before customer takes possession
                     </div>
                   </div>
@@ -101,20 +101,20 @@ export function InspectionType({ onBack, onContinue }: InspectionTypeProps) {
               {/* Return */}
               <button
                 onClick={() => handleTypeSelect('return')}
-                className="w-full bg-[#141416] border-2 border-[#2A2A2E] rounded-xl p-6 hover:border-[#F97066] hover:bg-[#1A1A1D] transition-all group"
+                className="w-full bg-white border-2 border-[#E5E7EB] rounded-xl p-6 hover:border-[#10B981] hover:shadow-md transition-all group"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-[#10B98120] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#10B98130] transition-colors">
                     <LogIn className="w-6 h-6 text-[#10B981]" />
                   </div>
                   <div className="flex-1 text-left">
-                    <div className="text-lg font-semibold text-[#FAFAFA] mb-1">
+                    <div className="text-lg font-semibold text-[#1A1A1D] mb-1">
                       Return Inspection
                     </div>
-                    <div className="text-sm text-[#A1A1AA]">
+                    <div className="text-sm text-[#6B7280]">
                       Bringing the vehicle back from loan
                     </div>
-                    <div className="mt-3 text-xs text-[#71717A]">
+                    <div className="mt-3 text-xs text-[#9CA3AF]">
                       Check for new damage and record final odometer reading
                     </div>
                   </div>
@@ -124,9 +124,9 @@ export function InspectionType({ onBack, onContinue }: InspectionTypeProps) {
           </div>
 
           {/* Info Card */}
-          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-4">
-            <div className="text-sm text-[#94A3B8] leading-relaxed">
-              <strong className="text-[#E2E8F0]">Tip:</strong> Each inspection captures exterior photos, checks for damage, and records dashboard readings (odometer and fuel level).
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="text-sm text-blue-900 leading-relaxed">
+              <strong className="font-semibold">Tip:</strong> Each inspection captures exterior photos, checks for damage, and records dashboard readings (odometer and fuel level).
             </div>
           </div>
         </div>

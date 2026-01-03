@@ -45,34 +45,34 @@ export function WasherConsole() {
   const estDone = new Date(startTime.getTime() + 30 * 60000);
   
   return (
-    <div className="min-h-screen bg-[#0C0C0D] p-8">
+    <div className="min-h-screen bg-[#F8F9FA] p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 pb-6 border-b border-[#2A2A2E]">
-        <div className="flex items-center gap-3">
-          <Droplet className="w-8 h-8 text-[#3B82F6]" />
-          <h1 className="text-2xl font-semibold text-white">Washer Console</h1>
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E5E7EB]">
+        <div className="flex items-center gap-2">
+          <Droplet className="w-6 h-6 text-[#3B82F6]" />
+          <h1 className="text-xl font-semibold text-[#1A1A1D]">Washer Console</h1>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[#A1A1AA]">Dave</span>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#10B98120] rounded-lg">
-            <span className="w-2 h-2 bg-[#10B981] rounded-full"></span>
-            <span className="text-sm text-[#10B981] font-medium">Ready</span>
+          <span className="text-[#6B7280] text-sm">Dave</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-100 rounded-lg">
+            <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+            <span className="text-sm text-green-700 font-medium">Ready</span>
           </div>
         </div>
       </div>
       
       {/* Current Job */}
       {currentJob && currentCar ? (
-        <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-8 mb-8">
-          <h2 className="text-sm uppercase tracking-wide text-[#71717A] mb-6">CURRENT JOB</h2>
+        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 mb-6 shadow-sm">
+          <h2 className="text-xs uppercase tracking-wide text-[#9CA3AF] mb-4 font-medium">CURRENT JOB</h2>
           
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <CarIcon model={currentCar.model} className="w-8 h-8 text-[#F97066]" />
-                <div className="font-mono text-3xl font-bold text-white">{currentCar.rego}</div>
+              <div className="flex items-center gap-2 mb-2">
+                <CarIcon model={currentCar.model} className="w-6 h-6 text-[#F97066]" />
+                <div className="font-mono text-2xl font-bold text-[#1A1A1D]">{currentCar.rego}</div>
               </div>
-              <div className="text-xl text-[#A1A1AA]">
+              <div className="text-lg text-[#6B7280]">
                 {currentCar.year} {currentCar.make} {currentCar.model} • {currentCar.color}
               </div>
             </div>
@@ -81,44 +81,44 @@ export function WasherConsole() {
               <ProgressBar value={progress} />
             </div>
             
-            <div className="text-sm text-[#A1A1AA]">
+            <div className="text-sm text-[#6B7280]">
               Started {startTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} • 
               Est. done {estDone.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
             </div>
             
-            <div className="flex gap-3 pt-4">
-              <Button variant="secondary" size="lg" className="flex-1">
-                <Pause className="w-5 h-5" />
+            <div className="flex gap-3 pt-2">
+              <Button variant="secondary" size="md" className="flex-1">
+                <Pause className="w-4 h-4" />
                 Pause
               </Button>
-              <Button variant="secondary" size="lg" className="flex-1">
-                <AlertTriangle className="w-5 h-5" />
+              <Button variant="secondary" size="md" className="flex-1">
+                <AlertTriangle className="w-4 h-4" />
                 Flag Issue
               </Button>
               <Button 
-                size="lg" 
+                size="md" 
                 className="flex-1 bg-[#10B981] hover:bg-[#059669]"
                 onClick={completeJob}
               >
-                <Check className="w-5 h-5" />
+                <Check className="w-4 h-4" />
                 Complete
               </Button>
             </div>
           </div>
         </div>
       ) : (
-        <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-8 mb-8 text-center">
-          <Droplet className="w-16 h-16 text-[#3B82F6] mx-auto mb-4 opacity-50" />
-          <h3 className="text-xl text-white mb-2">No active job</h3>
-          <p className="text-[#A1A1AA]">Select a job from the queue below to get started</p>
+        <div className="bg-white border border-[#E5E7EB] rounded-xl p-8 mb-6 text-center shadow-sm">
+          <Droplet className="w-12 h-12 text-[#3B82F6] mx-auto mb-3 opacity-50" />
+          <h3 className="text-lg text-[#1A1A1D] mb-2 font-semibold">No active job</h3>
+          <p className="text-[#6B7280] text-sm">Select a job from the queue below to get started</p>
         </div>
       )}
       
       {/* Up Next */}
       <div>
-        <h2 className="text-sm uppercase tracking-wide text-[#71717A] mb-4">UP NEXT</h2>
+        <h2 className="text-xs uppercase tracking-wide text-[#9CA3AF] mb-3 font-medium">UP NEXT</h2>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           {pendingJobs.slice(0, 4).map(job => {
             const car = getCarById(job.carId);
             if (!car) return null;
@@ -126,21 +126,21 @@ export function WasherConsole() {
             return (
               <div 
                 key={job.id}
-                className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6"
+                className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-sm"
               >
-                <div className="mb-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CarIcon model={car.model} className="w-6 h-6 text-[#71717A]" />
-                    <div className="font-mono text-xl font-bold text-white">{car.rego}</div>
+                <div className="mb-3">
+                  <div className="flex items-center gap-2 mb-1">
+                    <CarIcon model={car.model} className="w-5 h-5 text-[#9CA3AF]" />
+                    <div className="font-mono text-lg font-bold text-[#1A1A1D]">{car.rego}</div>
                   </div>
-                  <div className="text-[#A1A1AA] mb-3">
+                  <div className="text-[#6B7280] mb-2 text-sm">
                     {car.model} • {car.color}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${
                       job.priority === 'urgent' ? 'bg-[#EF4444]' : 'bg-[#3B82F6]'
                     }`} />
-                    <span className={`text-sm font-medium ${
+                    <span className={`text-xs font-semibold ${
                       job.priority === 'urgent' ? 'text-[#EF4444]' : 'text-[#3B82F6]'
                     }`}>
                       {job.priority === 'urgent' ? 'Urgent' : 'Normal'}
@@ -149,7 +149,7 @@ export function WasherConsole() {
                 </div>
                 
                 <Button 
-                  size="lg" 
+                  size="md" 
                   className="w-full"
                   onClick={() => startJob(job.id)}
                   disabled={!!currentJob}

@@ -72,16 +72,16 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
 
   if (analyzing) {
     return (
-      <div className="min-h-screen bg-[#0C0C0D] flex flex-col items-center justify-center px-6">
+      <div className="min-h-screen bg-[#F8F9FA] flex flex-col items-center justify-center px-6">
         <div className="max-w-md w-full text-center">
-          <div className="w-20 h-20 bg-gradient-to-br from-[#F97066] to-[#FDA29B] rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 bg-gradient-to-br from-[#F97066] to-[#FDA29B] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
             <Loader2 className="w-10 h-10 text-white animate-spin" />
           </div>
           
-          <h2 className="text-2xl font-semibold text-[#FAFAFA] mb-2">
+          <h2 className="text-2xl font-semibold text-[#1A1A1D] mb-2">
             Extracting Dashboard Data...
           </h2>
-          <p className="text-[#A1A1AA]">
+          <p className="text-[#6B7280]">
             Reading odometer and fuel level
           </p>
         </div>
@@ -90,18 +90,18 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
   }
 
   return (
-    <div className="min-h-screen bg-[#0C0C0D] flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
       {/* Header */}
-      <header className="bg-[#141416] border-b border-[#2A2A2E] px-6 py-4">
+      <header className="bg-white border-b border-[#E5E7EB] px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between max-w-md mx-auto mb-4">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors"
+            className="flex items-center gap-2 text-[#6B7280] hover:text-[#1A1A1D] transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back
           </button>
-          <span className="text-sm text-[#A1A1AA]">Step 3 of 3</span>
+          <span className="text-sm text-[#6B7280]">Step 3 of 3</span>
         </div>
         <StepIndicator currentStep={3} totalSteps={3} />
       </header>
@@ -110,10 +110,10 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
       <main className="flex-1 px-6 py-8 pb-24">
         <div className="max-w-md mx-auto space-y-6">
           <div>
-            <h2 className="text-2xl font-semibold text-[#FAFAFA] mb-2">
+            <h2 className="text-2xl font-semibold text-[#1A1A1D] mb-2">
               Capture Dashboard
             </h2>
-            <p className="text-[#A1A1AA]">
+            <p className="text-[#6B7280]">
               Ensure odometer and fuel gauge are visible
             </p>
           </div>
@@ -122,17 +122,17 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
           {!inspection.dashboardData ? (
             <button
               onClick={() => setShowCamera(true)}
-              className="w-full aspect-video bg-[#141416] border-2 border-dashed border-[#2A2A2E] rounded-xl flex flex-col items-center justify-center hover:border-[#F97066] hover:bg-[#1A1A1D] transition-all group"
+              className="w-full aspect-video bg-white border-2 border-dashed border-[#D1D5DB] rounded-xl flex flex-col items-center justify-center hover:border-[#F97066] hover:bg-[#F8F9FA] transition-all group shadow-sm"
             >
-              <Camera className="w-16 h-16 text-[#71717A] mb-4 group-hover:text-[#F97066] transition-colors" />
-              <div className="text-lg font-medium text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
+              <Camera className="w-16 h-16 text-[#9CA3AF] mb-4 group-hover:text-[#F97066] transition-colors" />
+              <div className="text-lg font-medium text-[#6B7280] group-hover:text-[#1A1A1D] transition-colors">
                 Capture Dashboard Photo
               </div>
             </button>
           ) : (
             <div className="space-y-4">
               {/* Photo Preview */}
-              <div className="relative rounded-xl overflow-hidden border border-[#2A2A2E]">
+              <div className="relative rounded-xl overflow-hidden border-2 border-[#E5E7EB] shadow-sm">
                 <img
                   src={inspection.dashboardData.photo}
                   alt="Dashboard"
@@ -147,12 +147,12 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
               </div>
 
               {/* Extracted Data */}
-              <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
+              <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-[#FAFAFA]">
+                  <h3 className="text-lg font-semibold text-[#1A1A1D]">
                     Dashboard Data Extracted
                   </h3>
-                  <div className="px-2 py-1 bg-[#10B98120] text-[#10B981] rounded text-xs font-medium">
+                  <div className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">
                     AI Detected
                   </div>
                 </div>
@@ -160,18 +160,18 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
                 {editMode ? (
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm text-[#A1A1AA] mb-2">
+                      <label className="block text-sm text-[#6B7280] font-medium mb-2">
                         Odometer (km)
                       </label>
                       <input
                         type="number"
                         value={manualOdometer}
                         onChange={(e) => setManualOdometer(e.target.value)}
-                        className="w-full bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg px-4 py-3 text-[#FAFAFA] focus:outline-none focus:border-[#F97066]"
+                        className="w-full bg-[#F8F9FA] border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-[#1A1A1D] focus:outline-none focus:border-[#F97066] focus:ring-4 focus:ring-[#F9706620]"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm text-[#A1A1AA] mb-2">
+                      <label className="block text-sm text-[#6B7280] font-medium mb-2">
                         Fuel Level (%)
                       </label>
                       <input
@@ -180,19 +180,19 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
                         onChange={(e) => setManualFuel(e.target.value)}
                         min="0"
                         max="100"
-                        className="w-full bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg px-4 py-3 text-[#FAFAFA] focus:outline-none focus:border-[#F97066]"
+                        className="w-full bg-[#F8F9FA] border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-[#1A1A1D] focus:outline-none focus:border-[#F97066] focus:ring-4 focus:ring-[#F9706620]"
                       />
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={handleManualUpdate}
-                        className="flex-1 px-4 py-2 bg-[#F97066] text-white rounded-lg font-medium hover:bg-[#FDA29B] transition-colors"
+                        className="flex-1 px-4 py-2 bg-[#F97066] text-white rounded-lg font-medium hover:bg-[#E85F55] transition-colors shadow-sm"
                       >
                         Save
                       </button>
                       <button
                         onClick={() => setEditMode(false)}
-                        className="flex-1 px-4 py-2 bg-[#2A2A2E] text-[#FAFAFA] rounded-lg font-medium hover:bg-[#3A3A3F] transition-colors"
+                        className="flex-1 px-4 py-2 bg-[#F8F9FA] text-[#1A1A1D] border-2 border-[#E5E7EB] rounded-lg font-medium hover:bg-white transition-colors"
                       >
                         Cancel
                       </button>
@@ -201,26 +201,26 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
                 ) : (
                   <>
                     <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div className="bg-[#0C0C0D] rounded-lg p-4">
-                        <div className="flex items-center gap-2 text-[#A1A1AA] mb-2">
+                      <div className="bg-[#F8F9FA] rounded-xl p-4 border border-[#E5E7EB]">
+                        <div className="flex items-center gap-2 text-[#6B7280] mb-2">
                           <Gauge className="w-4 h-4" />
-                          <span className="text-sm uppercase tracking-wide">Odometer</span>
+                          <span className="text-sm uppercase tracking-wide font-medium">Odometer</span>
                         </div>
-                        <div className="text-3xl font-bold text-[#FAFAFA]">
+                        <div className="text-3xl font-bold text-[#1A1A1D]">
                           {inspection.dashboardData.odometer.toLocaleString()}
                         </div>
-                        <div className="text-sm text-[#71717A] mt-1">km</div>
+                        <div className="text-sm text-[#9CA3AF] mt-1">km</div>
                       </div>
 
-                      <div className="bg-[#0C0C0D] rounded-lg p-4">
-                        <div className="flex items-center gap-2 text-[#A1A1AA] mb-2">
+                      <div className="bg-[#F8F9FA] rounded-xl p-4 border border-[#E5E7EB]">
+                        <div className="flex items-center gap-2 text-[#6B7280] mb-2">
                           <Droplet className="w-4 h-4" />
-                          <span className="text-sm uppercase tracking-wide">Fuel Level</span>
+                          <span className="text-sm uppercase tracking-wide font-medium">Fuel Level</span>
                         </div>
-                        <div className="text-3xl font-bold text-[#FAFAFA]">
+                        <div className="text-3xl font-bold text-[#1A1A1D]">
                           {inspection.dashboardData.fuelLevel}%
                         </div>
-                        <div className="mt-2 h-2 bg-[#2A2A2E] rounded-full overflow-hidden">
+                        <div className="mt-2 h-2 bg-[#E5E7EB] rounded-full overflow-hidden">
                           <div
                             className="h-full bg-gradient-to-r from-[#F97066] to-[#FDA29B] transition-all"
                             style={{ width: `${inspection.dashboardData.fuelLevel}%` }}
@@ -231,7 +231,7 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
 
                     <button
                       onClick={() => setEditMode(true)}
-                      className="text-sm text-[#F97066] hover:text-[#FDA29B] transition-colors"
+                      className="text-sm text-[#F97066] font-medium hover:text-[#E85F55] transition-colors"
                     >
                       Edit if incorrect →
                     </button>
@@ -241,17 +241,17 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
 
               {/* Previous Reading & Trip Info */}
               {currentVehicle.lastOdometer && (
-                <div className="bg-[#141416] border border-[#2A2A2E] rounded-lg p-4">
+                <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <div className="text-[#71717A] mb-1">Previous Reading</div>
-                      <div className="text-[#FAFAFA] font-medium">
+                      <div className="text-[#9CA3AF] mb-1">Previous Reading</div>
+                      <div className="text-[#1A1A1D] font-semibold">
                         {currentVehicle.lastOdometer.toLocaleString()} km
                       </div>
                     </div>
                     <div>
-                      <div className="text-[#71717A] mb-1">Trip Distance</div>
-                      <div className="text-[#FAFAFA] font-medium">
+                      <div className="text-[#9CA3AF] mb-1">Trip Distance</div>
+                      <div className="text-[#1A1A1D] font-semibold">
                         {tripDistance >= 0 ? '+' : ''}{tripDistance.toLocaleString()} km
                       </div>
                     </div>
@@ -261,13 +261,13 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
 
               {/* Anomaly Warning */}
               {showAnomalyWarning && (
-                <div className="bg-[#F59E0B20] border border-[#F59E0B] rounded-lg p-4 flex items-start gap-3">
-                  <AlertTriangle className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
+                <div className="bg-amber-50 border-2 border-amber-400 rounded-xl p-4 flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-[#F59E0B] mb-1">
+                    <div className="text-sm font-semibold text-amber-900 mb-1">
                       {tripDistance < 0 ? 'Odometer Decreased' : 'Unusual Distance'}
                     </div>
-                    <div className="text-sm text-[#FAFAFA]">
+                    <div className="text-sm text-amber-800">
                       {tripDistance < 0 
                         ? 'The odometer reading is lower than the previous inspection. Please verify.'
                         : 'The trip distance seems unusually high. Please verify the reading is correct.'
@@ -280,9 +280,9 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
           )}
 
           {/* Tips */}
-          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-4">
-            <div className="text-sm text-[#94A3B8] leading-relaxed">
-              <strong className="text-[#E2E8F0]">Tips:</strong>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="text-sm text-blue-900 leading-relaxed">
+              <strong className="font-semibold">Tips:</strong>
               <ul className="mt-2 space-y-1 list-disc list-inside">
                 <li>Turn ignition to ON (don't start engine)</li>
                 <li>Ensure dashboard is fully lit up</li>
@@ -295,7 +295,7 @@ export function DashboardCapture({ onBack, onContinue }: DashboardCaptureProps) 
       </main>
 
       {/* Fixed Bottom Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0C0C0D] border-t border-[#2A2A2E] px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E7EB] px-6 py-4 shadow-lg">
         <div className="max-w-md mx-auto">
           <SubmitButton
             onClick={onContinue}

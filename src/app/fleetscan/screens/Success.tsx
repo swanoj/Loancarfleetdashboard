@@ -19,7 +19,7 @@ export function Success({ reference, onNewInspection, onViewHistory, inspectionT
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0C0C0D] flex flex-col items-center justify-center px-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col items-center justify-center px-6 relative overflow-hidden">
       {/* Confetti Effect */}
       {showConfetti && (
         <div className="absolute inset-0 pointer-events-none">
@@ -42,7 +42,7 @@ export function Success({ reference, onNewInspection, onViewHistory, inspectionT
       <div className="max-w-md w-full text-center space-y-6 animate-fadeIn">
         {/* Success Icon */}
         <div className="relative">
-          <div className="w-24 h-24 bg-gradient-to-br from-[#10B981] to-[#34D399] rounded-full flex items-center justify-center mx-auto mb-6 animate-scaleIn">
+          <div className="w-24 h-24 bg-gradient-to-br from-[#10B981] to-[#34D399] rounded-full flex items-center justify-center mx-auto mb-6 animate-scaleIn shadow-xl">
             <Check className="w-12 h-12 text-white" strokeWidth={3} />
           </div>
           <div className="absolute inset-0 w-24 h-24 bg-gradient-to-br from-[#10B981] to-[#34D399] rounded-full mx-auto opacity-20 animate-ping" />
@@ -50,13 +50,13 @@ export function Success({ reference, onNewInspection, onViewHistory, inspectionT
 
         {/* Success Message */}
         <div>
-          <h1 className="text-3xl font-bold text-[#FAFAFA] mb-3">
+          <h1 className="text-3xl font-bold text-[#1A1A1D] mb-3">
             Inspection Submitted
           </h1>
-          <p className="text-[#A1A1AA]">
+          <p className="text-[#6B7280] font-medium">
             {vehicleRego} • {inspectionType === 'pre-loan' ? 'Pre-Loan' : 'Return'}
           </p>
-          <p className="text-sm text-[#71717A] mt-2">
+          <p className="text-sm text-[#9CA3AF] mt-2">
             {new Date().toLocaleDateString('en-US', { 
               day: 'numeric', 
               month: 'short', 
@@ -67,22 +67,22 @@ export function Success({ reference, onNewInspection, onViewHistory, inspectionT
           </p>
         </div>
 
-        <div className="h-px bg-[#2A2A2E]" />
+        <div className="h-px bg-[#E5E7EB]" />
 
         {/* Details */}
-        <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 space-y-4">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4 shadow-sm">
           <div>
-            <div className="text-sm text-[#71717A] mb-1">Summary sent to:</div>
-            <div className="text-[#FAFAFA] font-medium">fleet@workshop.com.au</div>
+            <div className="text-sm text-[#9CA3AF] mb-1 font-medium">Summary sent to:</div>
+            <div className="text-[#1A1A1D] font-semibold">fleet@workshop.com.au</div>
           </div>
           
           <div>
-            <div className="text-sm text-[#71717A] mb-1">Reference Number:</div>
-            <div className="font-mono text-lg text-[#F97066] font-semibold">{reference}</div>
+            <div className="text-sm text-[#9CA3AF] mb-1 font-medium">Reference Number:</div>
+            <div className="font-mono text-lg text-[#F97066] font-bold">{reference}</div>
           </div>
         </div>
 
-        <div className="h-px bg-[#2A2A2E]" />
+        <div className="h-px bg-[#E5E7EB]" />
 
         {/* Actions */}
         <div className="space-y-3 pt-4">
@@ -96,17 +96,17 @@ export function Success({ reference, onNewInspection, onViewHistory, inspectionT
           {onViewHistory && (
             <button
               onClick={onViewHistory}
-              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#141416] border border-[#2A2A2E] rounded-xl text-[#FAFAFA] font-medium hover:bg-[#1A1A1D] hover:border-[#3A3A3F] transition-all"
+              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#E5E7EB] rounded-xl text-[#1A1A1D] font-medium hover:bg-[#F8F9FA] hover:border-[#D1D5DB] transition-all shadow-sm"
             >
-              <FileText className="w-5 h-5" />
+              <FileText className="w-5 h-5 text-[#6B7280]" />
               View Inspection History
             </button>
           )}
         </div>
 
         {/* Success Badge */}
-        <div className="bg-[#10B98110] border border-[#10B981] rounded-lg p-4 mt-8">
-          <div className="text-sm text-[#10B981] leading-relaxed">
+        <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4 mt-8">
+          <div className="text-sm text-green-900 leading-relaxed font-medium">
             ✓ Your inspection has been recorded and synced to the fleet management system.
           </div>
         </div>

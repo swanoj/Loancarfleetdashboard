@@ -58,6 +58,30 @@ export interface ActivityLog {
   metadata?: Record<string, any>;
 }
 
+export interface Loan {
+  id: string;
+  carId: string;
+  customer: string;
+  checkedOut: string;
+  dueBack: string;
+}
+
+export interface CleaningJob {
+  id: string;
+  carId: string;
+  type: 'full' | 'quick' | 'interior' | 'exterior';
+  priority: 'urgent' | 'normal' | 'low';
+  status: 'pending' | 'in-progress' | 'completed';
+}
+
+export interface HoldItem {
+  id: string;
+  carId: string;
+  reason: string;
+  since: string;
+  notes?: string;
+}
+
 export const mockCars: Car[] = [
   { id: '1', rego: 'ABC-123', make: 'Toyota', model: 'Camry', year: 2022, color: 'White', colorHex: '#FFFFFF', bay: 'Bay 7', status: 'available', regoExpiry: '2025-03-15' },
   { id: '2', rego: 'DEF-456', make: 'Toyota', model: 'Hilux', year: 2023, color: 'Silver', colorHex: '#C0C0C0', bay: 'Bay 3', status: 'out', regoExpiry: '2025-04-22' },
@@ -89,22 +113,22 @@ export const mockCars: Car[] = [
 ];
 
 export const mockLoans: Loan[] = [
-  { id: '1', carId: '2', customer: 'John Smith', checkedOut: '2025-01-04T09:00:00', dueBack: '2025-01-04T14:30:00' },
-  { id: '2', carId: '9', customer: 'Jane Doe', checkedOut: '2025-01-04T10:00:00', dueBack: '2025-01-04T16:00:00' },
-  { id: '3', carId: '15', customer: 'Bob Wilson', checkedOut: '2025-01-04T07:00:00', dueBack: '2025-01-04T11:00:00' },
-  { id: '4', carId: '19', customer: 'Alice Johnson', checkedOut: '2025-01-03T14:00:00', dueBack: '2025-01-04T10:00:00' },
-  { id: '5', carId: '25', customer: 'David Brown', checkedOut: '2025-01-03T09:00:00', dueBack: '2025-01-03T17:00:00' },
+  { id: 'loan-1', carId: '2', customer: 'John Smith', checkedOut: '2025-01-04T09:00:00', dueBack: '2025-01-04T14:30:00' },
+  { id: 'loan-2', carId: '9', customer: 'Jane Doe', checkedOut: '2025-01-04T10:00:00', dueBack: '2025-01-04T16:00:00' },
+  { id: 'loan-3', carId: '15', customer: 'Bob Wilson', checkedOut: '2025-01-04T07:00:00', dueBack: '2025-01-04T11:00:00' },
+  { id: 'loan-4', carId: '19', customer: 'Alice Johnson', checkedOut: '2025-01-03T14:00:00', dueBack: '2025-01-04T10:00:00' },
+  { id: 'loan-5', carId: '25', customer: 'David Brown', checkedOut: '2025-01-03T09:00:00', dueBack: '2025-01-03T17:00:00' },
 ];
 
 export const mockCleaningJobs: CleaningJob[] = [
-  { id: '1', carId: '6', type: 'full', priority: 'urgent', status: 'pending' },
-  { id: '2', carId: '13', type: 'quick', priority: 'normal', status: 'pending' },
-  { id: '3', carId: '24', type: 'interior', priority: 'normal', status: 'pending' },
+  { id: 'clean-1', carId: '6', type: 'full', priority: 'urgent', status: 'pending' },
+  { id: 'clean-2', carId: '13', type: 'quick', priority: 'normal', status: 'pending' },
+  { id: 'clean-3', carId: '24', type: 'interior', priority: 'normal', status: 'pending' },
 ];
 
 export const mockHoldItems: HoldItem[] = [
-  { id: '1', carId: '26', reason: 'Damage inspection', since: '2025-01-02', notes: 'Minor scratch on rear bumper' },
-  { id: '2', carId: '27', reason: 'Service due', since: '2025-01-01', notes: '100k service overdue' },
+  { id: 'hold-1', carId: '26', reason: 'Damage inspection', since: '2025-01-02', notes: 'Minor scratch on rear bumper' },
+  { id: 'hold-2', carId: '27', reason: 'Service due', since: '2025-01-01', notes: '100k service overdue' },
 ];
 
 export const mockInsurance: Insurance[] = [

@@ -21,16 +21,16 @@ export function KPICard({ label, value, sublabel, accentColor, urgent, onClick }
   
   return (
     <div 
-      className={`bg-[#141416] border border-[#2A2A2E] rounded-xl p-5 transition-all duration-150 hover:border-[#3A3A3F] ${accentColor ? `border-l-2 ${accentColors[accentColor]}` : ''} ${onClick ? 'cursor-pointer hover:shadow-lg hover:shadow-[#F9706610]' : ''}`}
+      className={`bg-white border border-[#E5E7EB] rounded-xl p-3 transition-all duration-150 hover:border-[#D1D5DB] hover:shadow-md ${accentColor ? `border-l-4 ${accentColors[accentColor]}` : ''} ${onClick ? 'cursor-pointer' : ''}`}
       onClick={onClick}
     >
-      <div className="text-xs uppercase tracking-wide text-[#71717A] mb-2">{label}</div>
-      <div className="text-5xl font-bold text-white mb-1">{value}</div>
-      <div className="text-xs text-[#A1A1AA]">{sublabel}</div>
+      <div className="text-xs uppercase tracking-wide text-[#9CA3AF] mb-1 font-medium">{label}</div>
+      <div className="text-3xl font-bold text-[#1A1A1D] mb-0.5">{value}</div>
+      <div className="text-xs text-[#6B7280]">{sublabel}</div>
       {urgent && (
-        <div className="flex gap-1 mt-2">
-          <span className="w-2 h-2 bg-[#EF4444] rounded-full animate-pulse"></span>
-          <span className="w-2 h-2 bg-[#EF4444] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></span>
+        <div className="flex gap-1 mt-1.5">
+          <span className="w-1.5 h-1.5 bg-[#EF4444] rounded-full animate-pulse"></span>
+          <span className="w-1.5 h-1.5 bg-[#EF4444] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></span>
         </div>
       )}
     </div>

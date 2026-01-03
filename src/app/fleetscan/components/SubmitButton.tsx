@@ -20,11 +20,11 @@ export function SubmitButton({
   fullWidth = true,
   icon
 }: SubmitButtonProps) {
-  const baseClasses = "flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed";
+  const baseClasses = "flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm";
   
   const variantClasses = {
-    primary: "bg-[#F97066] text-white hover:bg-[#FDA29B] active:scale-95",
-    secondary: "bg-[#2A2A2E] text-[#FAFAFA] hover:bg-[#3A3A3F] active:scale-95"
+    primary: "bg-[#F97066] text-white hover:bg-[#E85F55] active:scale-95",
+    secondary: "bg-white border-2 border-[#E5E7EB] text-[#1A1A1D] hover:bg-[#F8F9FA] hover:border-[#D1D5DB] active:scale-95"
   };
   
   const widthClass = fullWidth ? "w-full" : "";

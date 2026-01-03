@@ -25,19 +25,19 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0C0C0D] flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
       {/* Header */}
-      <header className="bg-[#141416] border-b border-[#2A2A2E] px-6 py-4">
+      <header className="bg-white border-b border-[#E5E7EB] px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between max-w-md mx-auto">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors"
+            className="flex items-center gap-2 text-[#6B7280] hover:text-[#1A1A1D] transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back
           </button>
-          <div className="px-3 py-1 bg-[#2A2A2E] rounded-lg">
-            <span className="font-mono text-sm text-[#FAFAFA]">{currentVehicle.rego}</span>
+          <div className="px-3 py-1 bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg">
+            <span className="font-mono text-sm text-[#1A1A1D] font-medium">{currentVehicle.rego}</span>
           </div>
         </div>
       </header>
@@ -46,10 +46,10 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
       <main className="flex-1 px-6 py-8 pb-32">
         <div className="max-w-md mx-auto space-y-6">
           <div>
-            <h2 className="text-2xl font-semibold text-[#FAFAFA] mb-2">
+            <h2 className="text-2xl font-semibold text-[#1A1A1D] mb-2">
               Review Inspection
             </h2>
-            <p className="text-[#A1A1AA]">
+            <p className="text-[#6B7280]">
               {inspection.type === 'pre-loan' ? 'PRE-LOAN' : 'RETURN'} • {new Date().toLocaleDateString('en-US', { 
                 day: 'numeric', 
                 month: 'short', 
@@ -61,47 +61,47 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
           </div>
 
           {/* Vehicle Info */}
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
-            <div className="text-sm text-[#71717A] uppercase tracking-wide mb-2">Vehicle</div>
-            <div className="text-lg font-semibold text-[#FAFAFA]">
+          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
+            <div className="text-sm text-[#9CA3AF] uppercase tracking-wide mb-2 font-medium">Vehicle</div>
+            <div className="text-lg font-semibold text-[#1A1A1D]">
               {currentVehicle.make} {currentVehicle.model}
             </div>
-            <div className="text-sm text-[#A1A1AA] mt-1">
+            <div className="text-sm text-[#6B7280] mt-1">
               Rego: {currentVehicle.rego}
             </div>
           </div>
 
           {/* Dashboard Data */}
           {inspection.dashboardData && (
-            <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl overflow-hidden">
-              <div className="p-4 border-b border-[#2A2A2E]">
-                <div className="text-sm text-[#71717A] uppercase tracking-wide">Dashboard Readings</div>
+            <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
+              <div className="p-4 border-b border-[#E5E7EB]">
+                <div className="text-sm text-[#9CA3AF] uppercase tracking-wide font-medium">Dashboard Readings</div>
               </div>
-              <div className="grid grid-cols-2 divide-x divide-[#2A2A2E]">
-                <div className="p-4">
-                  <div className="flex items-center gap-2 text-[#A1A1AA] mb-2">
+              <div className="grid grid-cols-2 divide-x divide-[#E5E7EB]">
+                <div className="p-5">
+                  <div className="flex items-center gap-2 text-[#6B7280] mb-2">
                     <Gauge className="w-4 h-4" />
-                    <span className="text-xs uppercase tracking-wide">Odometer</span>
+                    <span className="text-xs uppercase tracking-wide font-medium">Odometer</span>
                   </div>
-                  <div className="text-2xl font-bold text-[#FAFAFA]">
+                  <div className="text-2xl font-bold text-[#1A1A1D]">
                     {inspection.dashboardData.odometer.toLocaleString()}
                   </div>
-                  <div className="text-sm text-[#71717A]">km</div>
+                  <div className="text-sm text-[#9CA3AF]">km</div>
                   {currentVehicle.lastOdometer && (
-                    <div className="text-xs text-[#71717A] mt-2">
+                    <div className="text-xs text-[#6B7280] mt-2 font-medium">
                       +{(inspection.dashboardData.odometer - currentVehicle.lastOdometer).toLocaleString()} km
                     </div>
                   )}
                 </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-2 text-[#A1A1AA] mb-2">
+                <div className="p-5">
+                  <div className="flex items-center gap-2 text-[#6B7280] mb-2">
                     <Droplet className="w-4 h-4" />
-                    <span className="text-xs uppercase tracking-wide">Fuel Level</span>
+                    <span className="text-xs uppercase tracking-wide font-medium">Fuel Level</span>
                   </div>
-                  <div className="text-2xl font-bold text-[#FAFAFA]">
+                  <div className="text-2xl font-bold text-[#1A1A1D]">
                     {inspection.dashboardData.fuelLevel}%
                   </div>
-                  <div className="mt-2 h-1.5 bg-[#2A2A2E] rounded-full overflow-hidden">
+                  <div className="mt-2 h-1.5 bg-[#E5E7EB] rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-[#F97066] to-[#FDA29B]"
                       style={{ width: `${inspection.dashboardData.fuelLevel}%` }}
@@ -113,14 +113,14 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
           )}
 
           {/* Damage Report */}
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
-            <div className="text-sm text-[#71717A] uppercase tracking-wide mb-3">Damage Report</div>
+          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
+            <div className="text-sm text-[#9CA3AF] uppercase tracking-wide mb-3 font-medium">Damage Report</div>
             
             {newDamageCount > 0 && (
-              <div className="mb-3 pb-3 border-b border-[#2A2A2E]">
+              <div className="mb-3 pb-3 border-b border-[#E5E7EB]">
                 <div className="flex items-center gap-2 mb-2">
                   <AlertTriangle className="w-4 h-4 text-[#F97066]" />
-                  <span className="text-sm font-medium text-[#F97066]">
+                  <span className="text-sm font-semibold text-[#F97066]">
                     {newDamageCount} new item{newDamageCount !== 1 ? 's' : ''}
                   </span>
                 </div>
@@ -128,10 +128,10 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
                   {inspection.damageItems
                     .filter(d => d.isNew && d.confirmed)
                     .map((damage) => (
-                      <li key={damage.id} className="flex items-start gap-2 text-sm text-[#FAFAFA]">
+                      <li key={damage.id} className="flex items-start gap-2 text-sm text-[#1A1A1D]">
                         <span className="text-[#F97066]">•</span>
                         <span className="flex-1">
-                          <span className="capitalize">{damage.type}</span> - {damage.location}
+                          <span className="capitalize font-medium">{damage.type}</span> - {damage.location}
                           {damage.size && ` (${damage.size})`}
                         </span>
                       </li>
@@ -142,7 +142,7 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
 
             {existingDamageCount > 0 && (
               <div>
-                <div className="text-sm font-medium text-[#A1A1AA] mb-2">
+                <div className="text-sm font-semibold text-[#6B7280] mb-2">
                   {existingDamageCount} existing (unchanged)
                 </div>
                 <ul className="space-y-1.5">
@@ -150,7 +150,7 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
                     .filter(d => !d.isNew)
                     .slice(0, 3)
                     .map((damage) => (
-                      <li key={damage.id} className="flex items-start gap-2 text-sm text-[#71717A]">
+                      <li key={damage.id} className="flex items-start gap-2 text-sm text-[#9CA3AF]">
                         <span>•</span>
                         <span className="flex-1">
                           <span className="capitalize">{damage.type}</span> - {damage.location}
@@ -159,7 +159,7 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
                     ))}
                 </ul>
                 {existingDamageCount > 3 && (
-                  <div className="text-xs text-[#71717A] mt-2">
+                  <div className="text-xs text-[#9CA3AF] mt-2">
                     +{existingDamageCount - 3} more
                   </div>
                 )}
@@ -167,7 +167,7 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
             )}
 
             {newDamageCount === 0 && existingDamageCount === 0 && (
-              <div className="flex items-center gap-2 text-sm text-[#10B981]">
+              <div className="flex items-center gap-2 text-sm text-green-600 font-medium">
                 <Check className="w-4 h-4" />
                 <span>No damage detected</span>
               </div>
@@ -175,10 +175,10 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
           </div>
 
           {/* Photos */}
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
+          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3">
-              <div className="text-sm text-[#71717A] uppercase tracking-wide">Photos</div>
-              <div className="flex items-center gap-2 text-sm text-[#A1A1AA]">
+              <div className="text-sm text-[#9CA3AF] uppercase tracking-wide font-medium">Photos</div>
+              <div className="flex items-center gap-2 text-sm text-[#6B7280]">
                 <ImageIcon className="w-4 h-4" />
                 <span>{inspection.exteriorPhotos.length} attached</span>
               </div>
@@ -203,15 +203,15 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
           </div>
 
           {/* Notes */}
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
-            <label className="text-sm text-[#71717A] uppercase tracking-wide block mb-3">
+          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
+            <label className="text-sm text-[#9CA3AF] uppercase tracking-wide block mb-3 font-medium">
               Notes (Optional)
             </label>
             <textarea
               value={notes}
               onChange={(e) => handleNotesChange(e.target.value)}
               placeholder="Add any additional notes or observations..."
-              className="w-full bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg px-4 py-3 text-[#FAFAFA] placeholder:text-[#71717A] focus:outline-none focus:border-[#F97066] transition-colors resize-none"
+              className="w-full bg-[#F8F9FA] border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-[#1A1A1D] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#F97066] focus:ring-4 focus:ring-[#F9706620] transition-all resize-none"
               rows={4}
             />
           </div>
@@ -222,9 +222,9 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
               type="checkbox"
               checked={confirmed}
               onChange={(e) => setConfirmed(e.target.checked)}
-              className="mt-1 w-5 h-5 rounded border-2 border-[#2A2A2E] bg-[#141416] checked:bg-[#F97066] checked:border-[#F97066] transition-colors cursor-pointer"
+              className="mt-1 w-5 h-5 rounded border-2 border-[#D1D5DB] bg-white checked:bg-[#F97066] checked:border-[#F97066] transition-colors cursor-pointer"
             />
-            <span className="flex-1 text-sm text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
+            <span className="flex-1 text-sm text-[#6B7280] group-hover:text-[#1A1A1D] transition-colors">
               I confirm this inspection is accurate and complete
             </span>
           </label>
@@ -232,7 +232,7 @@ export function ReviewSubmit({ onBack, onSubmit }: ReviewSubmitProps) {
       </main>
 
       {/* Fixed Bottom Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0C0C0D] border-t border-[#2A2A2E] px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E7EB] px-6 py-4 shadow-lg">
         <div className="max-w-md mx-auto">
           <SubmitButton
             onClick={onSubmit}

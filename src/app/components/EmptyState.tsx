@@ -17,9 +17,9 @@ export function EmptyState({ type, title, description }: EmptyStateProps) {
   
   return (
     <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
-      <Icon className="w-16 h-16 text-[#3B82F6] mb-4 opacity-50" />
-      <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-      <p className="text-sm text-[#A1A1AA] max-w-md">{description}</p>
+      <Icon className="w-12 h-12 text-[#3B82F6] mb-3 opacity-50" />
+      <h3 className="text-base font-semibold text-[#1A1A1D] mb-2">{title}</h3>
+      <p className="text-sm text-[#6B7280] max-w-md">{description}</p>
     </div>
   );
 }

@@ -8,15 +8,15 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 export function Select({ label, options, className = '', ...props }: SelectProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label className="text-sm font-medium text-[#FAFAFA]">
+        <label className="text-sm font-medium text-[#1A1A1D]">
           {label}
         </label>
       )}
       <div className="relative">
         <select
-          className={`appearance-none w-full bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg px-4 py-3 pr-10 text-[#FAFAFA] focus:outline-none focus:border-[#F97066] transition-colors ${className}`}
+          className={`appearance-none w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 pr-10 text-[#1A1A1D] focus:outline-none focus:border-[#F97066] focus:ring-2 focus:ring-[#F9706620] transition-colors ${className}`}
           {...props}
         >
           {options.map(option => (
@@ -25,7 +25,7 @@ export function Select({ label, options, className = '', ...props }: SelectProps
             </option>
           ))}
         </select>
-        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717A] pointer-events-none" />
+        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF] pointer-events-none" />
       </div>
     </div>
   );

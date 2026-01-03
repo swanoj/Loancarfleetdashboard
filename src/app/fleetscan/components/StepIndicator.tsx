@@ -19,7 +19,7 @@ export function StepIndicator({ currentStep, totalSteps, stepLabels }: StepIndic
             {step > 1 && (
               <div 
                 className={`h-0.5 w-8 transition-colors ${
-                  isComplete ? 'bg-[#F97066]' : 'bg-[#2A2A2E]'
+                  isComplete ? 'bg-[#F97066]' : 'bg-[#D1D5DB]'
                 }`} 
               />
             )}
@@ -27,17 +27,17 @@ export function StepIndicator({ currentStep, totalSteps, stepLabels }: StepIndic
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
                   isComplete
-                    ? 'bg-[#F97066] text-white'
+                    ? 'bg-[#F97066] text-white shadow-sm'
                     : isCurrent
                     ? 'bg-[#F9706620] text-[#F97066] ring-2 ring-[#F97066]'
-                    : 'bg-[#2A2A2E] text-[#71717A]'
+                    : 'bg-[#E5E7EB] text-[#9CA3AF]'
                 }`}
               >
                 {isComplete ? <Check className="w-4 h-4" /> : step}
               </div>
               {stepLabels && stepLabels[step - 1] && (
                 <span className={`text-xs ${
-                  isCurrent ? 'text-[#FAFAFA]' : 'text-[#71717A]'
+                  isCurrent ? 'text-[#1A1A1D] font-medium' : 'text-[#9CA3AF]'
                 }`}>
                   {stepLabels[step - 1]}
                 </span>

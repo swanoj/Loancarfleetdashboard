@@ -25,26 +25,26 @@ export function VehicleCard({ rego, make, model, color, year, lastInspection, st
   };
 
   return (
-    <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-4">
+    <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm">
       <div className="flex items-start justify-between mb-3">
         <div>
-          <div className="font-mono text-lg font-semibold text-[#FAFAFA] mb-1">{rego}</div>
-          <div className="text-[#FAFAFA]">{make} {model}</div>
-          <div className="text-sm text-[#A1A1AA] mt-1">
+          <div className="font-mono text-lg font-bold text-[#1A1A1D] mb-1">{rego}</div>
+          <div className="text-[#1A1A1D] font-semibold">{make} {model}</div>
+          <div className="text-sm text-[#6B7280] mt-1">
             {year && `${year} • `}{color}
           </div>
         </div>
         {status && (
-          <div className="px-3 py-1 bg-[#10B98115] text-[#10B981] rounded-lg text-sm font-medium">
+          <div className="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-sm font-semibold">
             {status}
           </div>
         )}
       </div>
       
       {lastInspection && (
-        <div className="flex items-center gap-2 text-sm text-[#71717A] mt-3 pt-3 border-t border-[#2A2A2E]">
+        <div className="flex items-center gap-2 text-sm text-[#6B7280] mt-3 pt-3 border-t border-[#E5E7EB]">
           <Calendar className="w-4 h-4" />
-          <span>Last inspected: {formatDate(lastInspection)}</span>
+          <span>Last inspected: <span className="font-medium">{formatDate(lastInspection)}</span></span>
         </div>
       )}
     </div>

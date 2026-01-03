@@ -9,20 +9,20 @@ interface StatusBadgeProps {
 
 export function StatusBadge({ variant, children }: StatusBadgeProps) {
   const styles = {
-    available: 'bg-[#10B98120] text-[#10B981]',
-    ready: 'bg-[#10B98120] text-[#10B981]',
-    ok: 'bg-[#10B98120] text-[#10B981]',
-    out: 'bg-[#3B82F620] text-[#3B82F6]',
-    overdue: 'bg-[#EF444420] text-[#EF4444]',
-    late: 'bg-[#EF444420] text-[#EF4444]',
-    'due-soon': 'bg-[#F59E0B20] text-[#F59E0B]',
-    hold: 'bg-[#6B728020] text-[#6B7280]',
-    service: 'bg-[#6B728020] text-[#6B7280]',
-    cleaning: 'bg-[#3B82F620] text-[#3B82F6]'
+    available: 'bg-green-100 text-green-700',
+    ready: 'bg-green-100 text-green-700',
+    ok: 'bg-green-100 text-green-700',
+    out: 'bg-blue-100 text-blue-700',
+    overdue: 'bg-red-100 text-red-700',
+    late: 'bg-red-100 text-red-700',
+    'due-soon': 'bg-amber-100 text-amber-700',
+    hold: 'bg-gray-100 text-gray-700',
+    service: 'bg-gray-100 text-gray-700',
+    cleaning: 'bg-blue-100 text-blue-700'
   };
   
   return (
-    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${styles[variant]}`}>
+    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold ${styles[variant]}`}>
       {children}
     </span>
   );

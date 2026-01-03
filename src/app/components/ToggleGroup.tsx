@@ -19,10 +19,10 @@ export function ToggleGroup({ options, value, onChange }: ToggleGroupProps) {
           key={option.value}
           type="button"
           onClick={() => onChange(option.value)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+          className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
             value === option.value
-              ? 'bg-[#F97066] text-white'
-              : 'bg-[#0C0C0D] text-[#A1A1AA] border border-[#2A2A2E] hover:border-[#3A3A3F]'
+              ? 'bg-[#F97066] text-white shadow-sm'
+              : 'bg-white text-[#6B7280] border border-[#E5E7EB] hover:border-[#D1D5DB] hover:bg-[#F8F9FA]'
           }`}
         >
           {option.label}

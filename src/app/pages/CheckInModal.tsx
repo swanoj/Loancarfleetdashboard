@@ -92,15 +92,15 @@ export function CheckInModal({ isOpen, onClose, carId, carRego }: CheckInModalPr
                   className={`flex flex-col items-center justify-center p-6 rounded-xl border-2 transition-all ${
                     isSelected
                       ? 'border-[#F97066] bg-[#F9706610]'
-                      : 'border-[#2A2A2E] bg-[#0C0C0D] hover:bg-[#1A1A1D]'
+                      : 'border-[#E5E7EB] bg-white hover:bg-[#F8F9FA]'
                   }`}
                 >
                   <Icon 
                     className="w-8 h-8 mb-3" 
                     style={{ color: isSelected ? '#F97066' : item.color }}
                   />
-                  <div className="font-semibold text-white mb-1">{item.label}</div>
-                  <div className="text-xs text-[#A1A1AA]">{item.description}</div>
+                  <div className="font-semibold text-[#1A1A1D] mb-1">{item.label}</div>
+                  <div className="text-xs text-[#6B7280]">{item.description}</div>
                 </button>
               );
             })}
@@ -109,21 +109,21 @@ export function CheckInModal({ isOpen, onClose, carId, carRego }: CheckInModalPr
         
         {outcome && (outcome === 'hold' || outcome === 'cleaning') && (
           <div>
-            <label className="text-sm font-medium text-[#FAFAFA] block mb-2">
+            <label className="text-sm font-medium text-[#1A1A1D] block mb-2">
               {outcome === 'hold' ? 'Issue Details' : 'Cleaning Notes'}
             </label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder={outcome === 'hold' ? 'Describe the issue...' : 'Any special cleaning requirements...'}
-              className="w-full bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg px-4 py-3 text-[#FAFAFA] placeholder:text-[#71717A] focus:outline-none focus:border-[#F97066] transition-colors resize-none"
+              className="w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[#1A1A1D] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#F97066] focus:ring-2 focus:ring-[#F9706620] transition-colors resize-none"
               rows={4}
             />
           </div>
         )}
         
         {/* Dashboard Scan Button */}
-        <div className="border-t border-[#2A2A2E] pt-6">
+        <div className="border-t border-[#E5E7EB] pt-6">
           <Button
             variant="secondary"
             onClick={() => setShowDashboardScan(true)}
@@ -134,15 +134,15 @@ export function CheckInModal({ isOpen, onClose, carId, carRego }: CheckInModalPr
           </Button>
           
           {dashboardData && (
-            <div className="mt-3 bg-[#0C0C0D] border border-[#2A2A2E] rounded-lg p-4">
+            <div className="mt-3 bg-[#F8F9FA] border border-[#E5E7EB] rounded-lg p-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <div className="text-[#71717A] mb-1">Odometer</div>
-                  <div className="text-white font-medium">{dashboardData.odometer.toLocaleString()} km</div>
+                  <div className="text-[#9CA3AF] mb-1 font-medium">Odometer</div>
+                  <div className="text-[#1A1A1D] font-semibold">{dashboardData.odometer.toLocaleString()} km</div>
                 </div>
                 <div>
-                  <div className="text-[#71717A] mb-1">Fuel Level</div>
-                  <div className="text-white font-medium">{dashboardData.fuelLevel}%</div>
+                  <div className="text-[#9CA3AF] mb-1 font-medium">Fuel Level</div>
+                  <div className="text-[#1A1A1D] font-semibold">{dashboardData.fuelLevel}%</div>
                 </div>
               </div>
             </div>

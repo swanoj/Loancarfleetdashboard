@@ -71,18 +71,18 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
   const currentAngleData = angles.find(a => a.value === currentAngle);
 
   return (
-    <div className="min-h-screen bg-[#0C0C0D] flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
       {/* Header */}
-      <header className="bg-[#141416] border-b border-[#2A2A2E] px-6 py-4">
+      <header className="bg-white border-b border-[#E5E7EB] px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between max-w-md mx-auto mb-4">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors"
+            className="flex items-center gap-2 text-[#6B7280] hover:text-[#1A1A1D] transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back
           </button>
-          <span className="text-sm text-[#A1A1AA]">Step 1 of 3</span>
+          <span className="text-sm text-[#6B7280]">Step 1 of 3</span>
         </div>
         <StepIndicator currentStep={1} totalSteps={3} />
       </header>
@@ -91,25 +91,25 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
       <main className="flex-1 px-6 py-8">
         <div className="max-w-md mx-auto space-y-6">
           <div>
-            <h2 className="text-2xl font-semibold text-[#FAFAFA] mb-2">
+            <h2 className="text-2xl font-semibold text-[#1A1A1D] mb-2">
               Capture Exterior Photos
             </h2>
-            <p className="text-[#A1A1AA]">
+            <p className="text-[#6B7280]">
               Take 4 photos from each angle
             </p>
           </div>
 
           {/* Main Capture Area */}
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6">
+          <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm">
             <div className="text-center mb-4">
-              <h3 className="text-lg font-medium text-[#FAFAFA] uppercase tracking-wide">
+              <h3 className="text-lg font-medium text-[#1A1A1D] uppercase tracking-wide">
                 {currentAngleData?.label}
               </h3>
             </div>
 
             <button
               onClick={() => handleCaptureClick(currentAngle)}
-              className="w-full aspect-video bg-[#0C0C0D] border-2 border-dashed border-[#2A2A2E] rounded-xl flex flex-col items-center justify-center hover:border-[#F97066] hover:bg-[#1A1A1D] transition-all group"
+              className="w-full aspect-video bg-[#F8F9FA] border-2 border-dashed border-[#D1D5DB] rounded-xl flex flex-col items-center justify-center hover:border-[#F97066] hover:bg-white transition-all group"
             >
               {getPhotoForAngle(currentAngle) ? (
                 <div className="relative w-full h-full">
@@ -118,7 +118,7 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
                     alt={currentAngle}
                     className="w-full h-full object-cover rounded-lg"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center rounded-lg">
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                       <Camera className="w-12 h-12 text-white mb-2" />
                       <div className="text-white font-medium">Retake</div>
@@ -127,11 +127,11 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
                 </div>
               ) : (
                 <>
-                  <Camera className="w-16 h-16 text-[#71717A] mb-4 group-hover:text-[#F97066] transition-colors" />
-                  <div className="text-lg font-medium text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
+                  <Camera className="w-16 h-16 text-[#9CA3AF] mb-4 group-hover:text-[#F97066] transition-colors" />
+                  <div className="text-lg font-medium text-[#6B7280] group-hover:text-[#1A1A1D] transition-colors">
                     Tap to capture
                   </div>
-                  <div className="text-sm text-[#71717A] mt-1">
+                  <div className="text-sm text-[#9CA3AF] mt-1">
                     {currentAngleData?.label}
                   </div>
                 </>
@@ -149,12 +149,12 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
                 <button
                   key={angle.value}
                   onClick={() => setCurrentAngle(angle.value)}
-                  className={`aspect-square rounded-lg border-2 transition-all ${
+                  className={`aspect-square rounded-lg border-2 transition-all shadow-sm ${
                     photo
-                      ? 'border-[#10B981] bg-[#10B98120]'
+                      ? 'border-[#10B981] bg-[#10B98110]'
                       : isSelected
-                      ? 'border-[#F97066] bg-[#F9706620]'
-                      : 'border-[#2A2A2E] bg-[#141416] hover:border-[#3A3A3F]'
+                      ? 'border-[#F97066] bg-[#F9706610]'
+                      : 'border-[#E5E7EB] bg-white hover:border-[#D1D5DB]'
                   }`}
                 >
                   <div className="flex flex-col items-center justify-center h-full gap-1">
@@ -167,8 +167,8 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
                       </>
                     ) : (
                       <>
-                        <Camera className={`w-5 h-5 ${isSelected ? 'text-[#F97066]' : 'text-[#71717A]'}`} />
-                        <span className={`text-xs font-medium ${isSelected ? 'text-[#F97066]' : 'text-[#71717A]'}`}>
+                        <Camera className={`w-5 h-5 ${isSelected ? 'text-[#F97066]' : 'text-[#9CA3AF]'}`} />
+                        <span className={`text-xs font-medium ${isSelected ? 'text-[#F97066]' : 'text-[#6B7280]'}`}>
                           {angle.shortLabel}
                         </span>
                       </>
@@ -182,7 +182,7 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
           {/* Photo Thumbnails */}
           {inspection.exteriorPhotos.length > 0 && (
             <div>
-              <h3 className="text-sm font-medium text-[#A1A1AA] mb-3">
+              <h3 className="text-sm font-medium text-[#6B7280] mb-3">
                 Captured Photos ({capturedCount}/{requiredCount})
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -202,9 +202,9 @@ export function ExteriorPhotos({ onBack, onContinue }: ExteriorPhotosProps) {
           )}
 
           {/* Tips */}
-          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-4">
-            <div className="text-sm text-[#94A3B8] leading-relaxed">
-              <strong className="text-[#E2E8F0]">Tips:</strong>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="text-sm text-blue-900 leading-relaxed">
+              <strong className="font-semibold">Tips:</strong>
               <ul className="mt-2 space-y-1 list-disc list-inside">
                 <li>Include the full vehicle in frame</li>
                 <li>Ensure good lighting</li>

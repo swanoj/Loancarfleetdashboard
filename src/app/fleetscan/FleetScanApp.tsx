@@ -8,6 +8,7 @@ import { DashboardCapture } from './screens/DashboardCapture';
 import { ReviewSubmit } from './screens/ReviewSubmit';
 import { Success } from './screens/Success';
 import { addRecentVehicle } from './utils/mockApi';
+import { ArrowLeft } from 'lucide-react';
 
 type Screen = 
   | 'lookup' 
@@ -19,7 +20,11 @@ type Screen =
   | 'success'
   | 'submitting';
 
-function FleetScanContent() {
+interface FleetScanContentProps {
+  onBackToHome?: () => void;
+}
+
+function FleetScanContent({ onBackToHome }: FleetScanContentProps) {
   const [currentScreen, setCurrentScreen] = useState<Screen>('lookup');
   const [submissionReference, setSubmissionReference] = useState('');
   const { inspection, currentVehicle, submitInspection, clearInspection } = useInspection();
@@ -75,6 +80,17 @@ function FleetScanContent() {
 
   return (
     <>
+      {/* Back to Home Button - Fixed Position */}
+      {onBackToHome && (
+        <button
+          onClick={onBackToHome}
+          className="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl text-white hover:bg-white/20 transition-all duration-150 group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="font-medium">Back to Dashboard</span>
+        </button>
+      )}
+      
       {currentScreen === 'lookup' && (
         <VehicleLookup onContinue={() => setCurrentScreen('type')} />
       )}
@@ -126,11 +142,11 @@ function FleetScanContent() {
   );
 }
 
-export default function FleetScanApp() {
+export default function FleetScanApp({ onBackToHome }: FleetScanContentProps = {}) {
   return (
     <InspectionProvider>
       <div className="font-sans antialiased">
-        <FleetScanContent />
+        <FleetScanContent onBackToHome={onBackToHome} />
       </div>
     </InspectionProvider>
   );
