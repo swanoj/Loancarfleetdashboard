@@ -257,7 +257,7 @@ Questions? [PHONE]
 
 ### **Future Improvements:**
 - [ ] Custom domain setup (e.g., loans.yourworkshop.com.au)
-- [ ] SMS automation integration (Twilio, MessageMedia)
+- [ ] SMS automation integration (MessageMedia)
 - [ ] QR code generation for in-person handovers
 - [ ] Email backup for SMS
 - [ ] WhatsApp integration

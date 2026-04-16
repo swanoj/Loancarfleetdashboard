@@ -284,7 +284,6 @@ When creating a loan in Fleet Command:
 1. Generate unique loan ID
 2. Create SMS with customer details
 3. Send via your SMS provider:
-   - Twilio
    - MessageMedia
    - Telstra SMS API
    - AWS SNS

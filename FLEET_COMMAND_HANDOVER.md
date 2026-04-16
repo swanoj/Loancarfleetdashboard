@@ -980,7 +980,7 @@ edit_mode   - Currently being edited
    - ✅ 40+ database functions created
    - ✅ Realtime subscriptions configured
    - ✅ Row-level security implemented
-   - ❓ SMS delivery service provider (Twilio assumed)
+   - ❓ SMS delivery service provider (not yet decided)
 
 2. **AI Services:**
    - ❓ Dashboard OCR provider not specified (OpenAI Vision / Google Cloud Vision assumed)

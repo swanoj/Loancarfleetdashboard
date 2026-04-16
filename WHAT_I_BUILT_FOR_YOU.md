@@ -522,7 +522,7 @@ Fleet Manager sees update
 ## 🎯 FUTURE ENHANCEMENTS
 
 ### **Easy to Add Later:**
-- SMS automation (Twilio integration)
+- SMS automation
 - Email notifications
 - WhatsApp messages
 - QR code generation
